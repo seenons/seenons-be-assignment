@@ -1,8 +1,9 @@
-import { CoverageEntity } from './coverage.entity';
+import { CoverageAvailabilityEntity } from './coverage_availability.entity';
 
 export class ServiceProviderCoverageEntity {
   id!: string;
-  serviceProvider_id!: string;
   stream_id!: string;
-  coverages!: CoverageEntity[];
+  postal_code_start!: string;
+  postal_code_end!: string;
+  coverage_availability!: CoverageAvailabilityEntity[];
 }

@@ -16,9 +16,7 @@ describe('RegisterStreamService', () => {
     jest.clearAllMocks();
   });
 
-
   describe('registerStream', () => {
-
     beforeEach(() => {
       //4. Opportunities
     });
@@ -26,7 +24,13 @@ describe('RegisterStreamService', () => {
     it(`should throw an error if the customer doesn't exist`, () => {
       jest.spyOn(customerRepository, 'findById').mockReturnValueOnce(undefined);
 
-      const response = registerStreamService.registerStream('customer-id', 'stream-id', 'service-provider-id', new Date());
+      const response = registerStreamService.registerStream(
+        'customer-id',
+        'stream-id',
+        'service-provider-id',
+        new Date(),
+        5,
+      );
 
       expect(response).toEqual({
         error: 'Customer not found',
@@ -57,7 +61,13 @@ describe('RegisterStreamService', () => {
 
       jest.spyOn(customerRepository, 'save').mockReturnValueOnce(undefined);
 
-      const response = registerStreamService.registerStream('customer-id', 'stream-id', 'service-provider-id', new Date('2023-01-01'));
+      const response = registerStreamService.registerStream(
+        'customer-id',
+        'stream-id',
+        'service-provider-id',
+        new Date('2023-01-01'),
+        5,
+      );
 
       expect(response).toEqual({
         id: 'customer-id',
@@ -67,13 +77,16 @@ describe('RegisterStreamService', () => {
         streams: [
           {
             id: expect.any(String),
-            customer_id: 'customer-id',
             stream_id: 'stream-id',
             service_provider_id: 'service-provider-id',
             pickup_date: new Date('2023-01-01'),
-            created_at: expect.any(Date),
-          }],
+            quantity: 5,
+          },
+        ],
       });
     });
+
+    //4. Opportunities
+    it(`should update the previous stream if it already exists`, () => {});
   });
 });

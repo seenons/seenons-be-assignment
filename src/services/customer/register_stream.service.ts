@@ -21,6 +21,7 @@ export class RegisterStreamService {
     streamId: string,
     serviceProviderId: string,
     pickupDate: Date,
+    quantity: number,
   ): RegisterStreamResponse {
     const customer = this.customerRepository.findById(customerId);
 
@@ -40,15 +41,15 @@ export class RegisterStreamService {
       - How about a Rich Domain Model instead of Anemic Domain Model?
       - How about a Domain Event to notify the service provider?
       - How about a Domain Event to notify the customer?
+      - Can you spot improvements avoid duplicates? (immutability vs mutability perhaps?)
     */
 
     customer.streams.push({
       id: crypto.randomUUID(),
-      customer_id: customerId,
       stream_id: streamId,
       service_provider_id: serviceProviderId,
       pickup_date: pickupDate,
-      created_at: new Date(),
+      quantity: quantity,
     });
 
     this.customerRepository.save(customer);
