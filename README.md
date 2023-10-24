@@ -31,7 +31,7 @@ This project is built using the following technologies:
 ## Data Model Representation
 
 A Service Provider can be described as
-A business that can perform a collection of waste
+A business that can perform a collection of waste for specific streams at specific dates
 
 ### Service Provider
 
@@ -123,3 +123,7 @@ Opportunities
 - Implement caching strategy
 - Can you apply a better design pattern for the overall registration and data modeling?
 - Show us your understanding of Domain Driven Design and Loose Coupling
+
+## Disclaimer
+
+Please note that this assignment is not a direct representation of how Seenons built its software. It was designed with all levels of seniority in mind, so the concepts, patterns, and tools used are not entirely accurate.
