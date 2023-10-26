@@ -16,9 +16,9 @@ We purposely made this project framework agnostic and it only contains the bare 
 
 ## The output
 
-Perform as many changes are you see fit for each gate, just make sure that these changes are functional.
-In case you perform changes to the data model (opportunity), make sure to include a diagram that explains the change
-Ensure that test coverage is adequate and that it matches what you would deliver as an product engineer
+Make as many changes are you see fit for each gate, just make sure that these changes are functional.
+In case you make changes to the data model (opportunity), be sure to include a diagram that explains the change.
+Ensure that test coverage is adequate and that it matches what you would deliver as a product engineer
 
 ## Technologies Used
 
