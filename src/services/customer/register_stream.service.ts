@@ -41,7 +41,7 @@ export class RegisterStreamService {
       - How about a Rich Domain Model instead of an Anemic Domain Model?
       - How about a Domain Event to notify the service provider?
       - How about a Domain Event to notify the customer?
-      - Can you spot improvements avoid duplicates? (immutability vs mutability perhaps?)
+      - Can you spot improvements to avoid duplicates? (immutability vs mutability perhaps?)
     */
 
     customer.streams.push({
