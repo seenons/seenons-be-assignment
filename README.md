@@ -12,7 +12,7 @@ We have divided the assignment into what we called "gates", these gates are refe
 Some of them are required, some of them give you bonus points.
 Depending on your seniority, points are added or deducted based off your choices.
 
-We purposedly made this project framework agnostic and it only contains the bare minimum to perform the necessary usecase.
+We purposely made this project framework agnostic and it only contains the bare minimum to perform the necessary use cases.
 
 ## The output
 
