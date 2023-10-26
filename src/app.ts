@@ -21,6 +21,8 @@ class App {
     this.serviceProviderAvailabilityService = new ServiceProviderAvailabilityService(
       this.serviceProviderRepository,
     );
+
+    console.log('App ran correctly');
   }
 }
 
