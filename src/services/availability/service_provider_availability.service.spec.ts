@@ -16,7 +16,7 @@ describe('ServiceProviderAvailabilityService', () => {
   describe('findAvailabilityAt', () => {
     it(`should return empty list if no service providers are available for postal code #X`, () => {});
 
-    it(`should return empty list fi no service providers are available at date $y`, () => {});
+    it(`should return empty list if no service providers are available at date $y`, () => {});
 
     it(`should return a list of service providers that are available for postal code #X at date $y`, () => {});
   });
