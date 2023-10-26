@@ -116,7 +116,7 @@ A person or business entity that has waste to be collected at a given address
 - Refactor Customer streams registration use case
   - Can you guard against business invariants?
 
-Opportunities
+#### Opportunities
 
 - Enhance testing capabilities and reusability
 - Implement a Database Provider
