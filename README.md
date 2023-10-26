@@ -98,7 +98,7 @@ A person or business entity that has waste to be collected at a given address
 
 ### Hard Requirements
 
-Implementation
+#### Implementation
 
 - Finilize implementing the customer stream pickup registration
 - Implement the use case to retrieve service providers available at a given location and date
