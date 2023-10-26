@@ -18,7 +18,7 @@ We purposely made this project framework agnostic and it only contains the bare 
 
 Make as many changes are you see fit for each gate, just make sure that these changes are functional.
 In case you make changes to the data model (opportunity), be sure to include a diagram that explains the change.
-Ensure that test coverage is adequate and that it matches what you would deliver as a product engineer
+Ensure that test coverage is adequate and that it matches what you would deliver as a product engineer.
 
 ## Technologies Used
 
@@ -33,22 +33,28 @@ This project is built using the following technologies:
 ### Service Provider
 
 A Service Provider can be described as:
-A business that can perform a collection of waste for specific streams at specific dates
+A business that can perform a collection of waste for specific streams at specific dates.
 
 | id  |      name      |                 address                 | covered streams |
 | :-: | :------------: | :-------------------------------------: | :-------------: |
 |  1  |    Rewaste     |   Stationplein, 1, 1012 AB Amsterdam    |     [1, 2]      |
 |  1  | Bluecollection | Prins Hendrikkade, 1, 1012 JD Amsterdam |       [3]       |
 
-### Service Provider Covered Streams
+#### Service Provider Covered Streams
 
-| id  | stream_id | postal_code_start | postal_code_end | avaialbility |
-| :-: | :-------: | :---------------: | :-------------: | :----------: |
-|  1  |   paper   |       1010        |      1020       |  [1, 2, 3]   |
-|  2  |   metal   |       1010        |      1020       |    [4,5 ]    |
-|  3  |   metal   |       1000        |      9999       | [1,2,3,4,5]  |
+Service provider covered streams can be described as:
+The streams in which a service provider has covered in a postal code range, for a given availability.
 
-#### Coverages
+| id  | stream_id | postal_code_start | postal_code_end |  avaialbility   |
+| :-: | :-------: | :---------------: | :-------------: | :-------------: |
+|  1  |   paper   |       1010        |      1020       |    [1, 2, 3]    |
+|  2  |   metal   |       1010        |      1020       |   [1, 4, 5 ]    |
+|  3  |   metal   |       1000        |      9999       | [1, 2, 3, 4, 5] |
+
+#### Coverage Availability
+
+Coverage availability can be described as:
+A simple Date reference of an availability calendar.
 
 | id  |    date    |
 | :-: | :--------: |
@@ -74,14 +80,17 @@ When searching for:
 ### Customer
 
 A Customer can be described as:
-A person or business entity that has waste to be collected at a given address
+A person or business entity that has waste to be collected at a given address.
 
 | id  |     name      |                  address                  | streams |
 | :-: | :-----------: | :---------------------------------------: | :-----: |
 |  1  |    Seenons    |    Danzigerkade 5B, 1013 AP Amsterdam     |   [1]   |
 |  1  | Mega City One | Prins Hendrikkade, 100, 1012 JD Amsterdam |  [2,3]  |
 
-### Customer Streams
+#### Customer Streams
+
+A Customer Stream can be described as:
+A stream pickup for a customer to be performed by a Service Provider at a given date.
 
 | id  | stream_id | service_provider_id | pickup_date |
 | :-: | :-------: | :-----------------: | ----------- |
@@ -100,30 +109,31 @@ A person or business entity that has waste to be collected at a given address
 
 #### Implementation
 
-- Finilize implementing the customer stream pickup registration
-- Implement the use case to retrieve service providers available at a given location and date
+- Finalize implementing the customer stream pickup registration.
+- Implement the use case to retrieve service providers available at a given location and date.
 
 #### Testability
 
-- Ensure completeness of the Register Stream Service Spec
-- Ensure completeness of the Service Providers Availability Spec
+- Ensure completeness of the Register Stream Service Spec.
+- Ensure completeness of the Service Providers Availability Spec.
 
 ### Bonus points
 
 #### Refactoring
 
-- Refactor the response model for the customer stream pickup registration
-- Refactor Customer streams registration use case
+- Refactor the response model for the customer stream pickup registration.
+- Refactor Customer streams registration use case.
   - Can you guard against business invariants?
 
 #### Opportunities
 
-- Enhance testing capabilities and reusability
-- Implement a Database Provider
-- Implement caching strategy
+- Enhance testing capabilities and reusability.
+- Implement a Database Provider.
+- Implement caching strategy.
 - Can you apply a better design pattern for the overall registration and data modeling?
-- Show us your understanding of Domain Driven Design and Loose Coupling
+- Show us your understanding of Domain Driven Design and Loose Coupling.
+- Can you spot opportunities for a `read-model`?
 
 ## Disclaimer
 
-Please note that this assignment is not a direct representation of how Seenons built its software. It was designed with all levels of seniority in mind, so the concepts, patterns, and tools used are not entirely accurate.
+Please note that this assignment is not a direct representation of how Seenons built its software. It was designed with all levels of seniority in mind, so the concepts, patterns, and tools used may not be entirely accurate.
