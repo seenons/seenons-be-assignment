@@ -30,10 +30,10 @@ This project is built using the following technologies:
 
 ## Data Model Representation
 
-A Service Provider can be described as
-A business that can perform a collection of waste for specific streams at specific dates
-
 ### Service Provider
+
+A Service Provider can be described as:
+A business that can perform a collection of waste for specific streams at specific dates
 
 | id  |      name      |                 address                 | covered streams |
 | :-: | :------------: | :-------------------------------------: | :-------------: |
