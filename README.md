@@ -81,7 +81,7 @@ A person or business entity that has waste to be collected at a given address
 |  1  |    Seenons    |    Danzigerkade 5B, 1013 AP Amsterdam     |   [1]   |
 |  1  | Mega City One | Prins Hendrikkade, 100, 1012 JD Amsterdam |  [2,3]  |
 
-### Customer Strams
+### Customer Streams
 
 | id  | stream_id | service_provider_id | pickup_date |
 | :-: | :-------: | :-----------------: | ----------- |
