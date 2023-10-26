@@ -103,7 +103,7 @@ A person or business entity that has waste to be collected at a given address
 - Finilize implementing the customer stream pickup registration
 - Implement the use case to retrieve service providers available at a given location and date
 
-Testability
+#### Testability
 
 - Ensure completeness of the Register Stream Service Spec
 - Ensure completeness of the Service Providers Availability Spec
