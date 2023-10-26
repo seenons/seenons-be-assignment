@@ -110,7 +110,7 @@ A person or business entity that has waste to be collected at a given address
 
 ### Bonus points
 
-Refactoring
+#### Refactoring
 
 - Refactor the response model for the customer stream pickup registration
 - Refactor Customer streams registration use case
