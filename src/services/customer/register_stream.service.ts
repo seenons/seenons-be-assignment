@@ -38,7 +38,7 @@ export class RegisterStreamService {
       - How do you make sure that the pickup date is available for the service provider?
 
       4. Opportunities
-      - How about a Rich Domain Model instead of Anemic Domain Model?
+      - How about a Rich Domain Model instead of an Anemic Domain Model?
       - How about a Domain Event to notify the service provider?
       - How about a Domain Event to notify the customer?
       - Can you spot improvements avoid duplicates? (immutability vs mutability perhaps?)
