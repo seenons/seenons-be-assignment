@@ -60,7 +60,7 @@ A business that can perform a collection of waste for specific streams at specif
 
 #### Expectation
 
-When searing for:
+When searching for:
 
 | postal_code |    date    | result                                          |
 | :---------: | :--------: | ----------------------------------------------- |
