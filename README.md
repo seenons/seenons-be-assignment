@@ -71,10 +71,10 @@ When searching for:
 
 ---
 
+### Customer
+
 A Customer can be described as:
 A person or business entity that has waste to be collected at a given address
-
-## Customer
 
 | id  |     name      |                  address                  | streams |
 | :-: | :-----------: | :---------------------------------------: | :-----: |
