@@ -111,7 +111,7 @@ A stream pickup for a customer to be performed by a Service Provider at a given 
 #### Implementation
 
 - Finalize implementing the customer stream pickup registration.
-- Implement the use case to retrieve service providers available at a given location and date.
+- Implement the use case to retrieve which service providers are available at a given location and date.
 
 #### Testability
 
