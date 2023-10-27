@@ -46,7 +46,7 @@ A business that can perform a collection of waste for specific streams at specif
 Service provider covered streams can be described as:
 The streams in which a service provider has covered in a postal code range, for a given availability.
 
-| id  | stream_id | postal_code_start | postal_code_end |  avaialbility   |
+| id  | stream_id | postal_code_start | postal_code_end |  availability   |
 | :-: | :-------: | :---------------: | :-------------: | :-------------: |
 |  1  |   paper   |       1010        |      1020       |    [1, 2, 3]    |
 |  2  |   metal   |       1010        |      1020       |   [1, 4, 5 ]    |
