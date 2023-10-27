@@ -6,7 +6,7 @@ At Seenons, we are building a platform to support a circular economy. This encom
 
 ## The assignment
 
-Before a customer can register a collection at Seenons, we need to verify which waste streams are available for pickup at a given date. The task is to complete two service, one of them to retreive availability of service providers and another to register the collection.
+Before a customer can request their waste to be collected via Seenons, we need to verify which waste streams are available for pickup at a given date. The task is to complete two services, one of them to retrieve availability of service providers and another to register the collection.
 
 We have divided the assignment into what we called "gates", these gates are references to engineering skills that we are looking for in a future colleague.
 Some of them are required, some of them give you bonus points.
