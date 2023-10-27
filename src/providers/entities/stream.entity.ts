@@ -1,4 +1,4 @@
-export class WasteStreamEntity {
+export class StreamEntity {
   id!: string;
   label!: string;
 }

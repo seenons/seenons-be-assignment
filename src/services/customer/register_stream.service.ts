@@ -4,8 +4,6 @@ import * as crypto from 'crypto';
 
 /*
   2. Refactoring
-  - Should you return the customer or the stream? Why? (Think about the Bounded Context in which you are affecting)
-  - Can you type the Response in a better way?
 */
 export type RegisterStreamResponse =
   | CustomerEntity

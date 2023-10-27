@@ -17,34 +17,43 @@ We purposely made this project framework agnostic and it only contains the bare 
 ## The output
 
 Make as many changes are you see fit for each gate, just make sure that these changes are functional.
-In case you make changes to the data model (opportunity), be sure to include a diagram that explains the change.
+
+In case you make changes to the data model (opportunity), be sure to include a diagram that explains it.
+
 Ensure that test coverage is adequate and that it matches what you would deliver as a product engineer.
 
 ## Technologies Used
 
 This project is built using the following technologies:
 
-- JavaScript
+- Node.js
 - npm
 - TypeScript
 
 Although experience with these technologies is not a requirement to join our team, we are looking for people who will be able to work in this ecosystem. Your own experience will be taken into account when reviewing your assignment, so no need to panic if you are not familiar with them.
+
+You can complete the assingment using the following ecosystems:
+
+- Node JS/TS
+- .NET (Core) 5+
+- Java / Kotlin
+
 ## Data Model Representation
 
 ### Service Provider
 
 A Service Provider can be described as:
-A business that can perform a collection of waste for specific streams at specific dates.
+A business that can collect waste for specific streams at specific dates and areas.
 
 | id  |      name      |                 address                 | covered streams |
 | :-: | :------------: | :-------------------------------------: | :-------------: |
 |  1  |    Rewaste     |   Stationplein, 1, 1012 AB Amsterdam    |     [1, 2]      |
 |  2  | Bluecollection | Prins Hendrikkade, 1, 1012 JD Amsterdam |       [3]       |
 
-#### Service Provider Covered Streams
+#### Service Provider Coverage
 
-Service provider covered streams can be described as:
-The streams in which a service provider has covered in a postal code range, for a given availability.
+Service provider coverage can be described as:
+The streams in which a service provider has covered in a postal code range, for a given date availability.
 
 | id  | stream_id | postal_code_start | postal_code_end |  availability   |
 | :-: | :-------: | :---------------: | :-------------: | :-------------: |
@@ -65,17 +74,6 @@ A simple Date reference of an availability calendar.
 |  4  | 2023-10-04 |
 |  5  | 2023-10-05 |
 
-#### Expectation
-
-When searching for:
-
-| postal_code |    date    | result                                          |
-| :---------: | :--------: | ----------------------------------------------- |
-|    1010     | 2023-10-01 | [Rewaste (paper, metal), Bluecollection(metal)] |
-|    1010     | 2023-10-04 | [Rewaste(metal) , Bluecollection(metal)]        |
-|    2000     | 2023-10-05 | [Bluecollection(metal)]                         |
-|    2000     | 2023-10-06 | []                                              |
-
 ---
 
 ### Customer
@@ -91,13 +89,13 @@ A person or business entity that has waste to be collected at a given address.
 #### Customer Streams
 
 A Customer Stream can be described as:
-A stream pickup for a customer to be performed by a Service Provider at a given date.
+A registered stream pickup for a customer to be performed by a Service Provider at a given date and how many containers.
 
-| id  | stream_id | service_provider_id | pickup_date |
-| :-: | :-------: | :-----------------: | ----------- |
-|  1  |   paper   |          1          | 2023-10-01  |
-|  2  |   metal   |          2          | 2023-10-01  |
-|  3  |   metal   |          2          | 2023-10-02  |
+| id  | stream_id | service_provider_id | pickup_date | quantity |
+| :-: | :-------: | :-----------------: | ----------- | -------- |
+|  1  |   paper   |          1          | 2023-10-01  | 1        |
+|  2  |   metal   |          2          | 2023-10-01  | 1        |
+|  3  |   metal   |          2          | 2023-10-02  | 1        |
 
 ## Gates
 
@@ -110,8 +108,25 @@ A stream pickup for a customer to be performed by a Service Provider at a given 
 
 #### Implementation
 
-- Finalize implementing the customer stream pickup registration.
+- Implement the customer stream pickup registration.
 - Implement the use case to retrieve which service providers are available at a given location and date.
+
+#### Expectation
+
+When registering a stream pick up, at least the following requirements must be met:
+
+- Ensure the Servide Provider exists
+- Ensure the Stream exists
+- Ensure availability
+
+When searching for service providers, the expected results is:
+
+| postal_code |    date    | result                                          |
+| :---------: | :--------: | ----------------------------------------------- |
+|    1010     | 2023-10-01 | [Rewaste (paper, metal), Bluecollection(metal)] |
+|    1010     | 2023-10-04 | [Rewaste(metal) , Bluecollection(metal)]        |
+|    2000     | 2023-10-05 | [Bluecollection(metal)]                         |
+|    2000     | 2023-10-06 | []                                              |
 
 #### Testability
 
@@ -137,4 +152,6 @@ A stream pickup for a customer to be performed by a Service Provider at a given 
 
 ## Disclaimer
 
-Please note that this assignment is not a direct representation of how Seenons built its software. It was designed with all levels of seniority in mind, so the concepts, patterns, and tools used may not be entirely accurate.
+Please note that this assignment is not a direct representation of how Seenons built its software.
+
+The assignment is meant for all levels of seniority in mind, so the concepts, patterns, domain models and tools have been simplified to ensure fairness.

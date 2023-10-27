@@ -12,15 +12,10 @@ describe('RegisterStreamService', () => {
   });
 
   afterEach(() => {
-    //4. Opportunities
     jest.clearAllMocks();
   });
 
   describe('registerStream', () => {
-    beforeEach(() => {
-      //4. Opportunities
-    });
-
     it(`should throw an error if the customer doesn't exist`, () => {
       jest.spyOn(customerRepository, 'findById').mockReturnValueOnce(undefined);
 
@@ -54,7 +49,6 @@ describe('RegisterStreamService', () => {
       jest.spyOn(customerRepository, 'findById').mockReturnValueOnce({
         id: 'customer-id',
         name: 'customer-name',
-        email: 'customer-email',
         address: 'customer-address',
         streams: [],
       });
@@ -72,7 +66,6 @@ describe('RegisterStreamService', () => {
       expect(response).toEqual({
         id: 'customer-id',
         name: 'customer-name',
-        email: 'customer-email',
         address: 'customer-address',
         streams: [
           {

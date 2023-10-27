@@ -1,12 +1,11 @@
 import { CustomerEntity } from '../entities/customer.entity';
 
-//4. Opportunity
 export class CustomerRepository {
   private readonly customers: CustomerEntity[] = [];
 
   /*
-    Can you use a better strategy?
-    Perhaps a database instead of an in-memory array?
+    4. Opportunity
+    Can you use a better strategy to assing values?
   */
   public save(customer: CustomerEntity): void {
     const existingCustomer = this.findById(customer.id);
