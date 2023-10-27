@@ -2,7 +2,7 @@
 
 Hello there!
 
-At Seenons, we aim to build a platform for the circular economy. This encompasses collection, transportation and re-selling of different waste streams, and circular products created from them. A strong technical backbone, design and usability are key to the success of the platform!
+At Seenons, we are building a platform to support a circular economy. This encompasses collection, transportation and re-purposing of different waste streams. A strong technical backbone, design and usability are key to the success of the platform!
 
 ## The assignment
 
