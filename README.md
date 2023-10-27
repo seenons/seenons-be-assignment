@@ -28,6 +28,7 @@ This project is built using the following technologies:
 - npm
 - TypeScript
 
+Although experience with these technologies is not a requirement to join our team, we are looking for people who will be able to work in this ecosystem. Your own experience will be taken into account when reviewing your assignment, so no need to panic if you are not familiar with them.
 ## Data Model Representation
 
 ### Service Provider
