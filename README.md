@@ -34,7 +34,7 @@ Although experience with these technologies is not a requirement to join our tea
 ### Service Provider
 
 A Service Provider can be described as:
-A business that can perform a collection of waste for specific streams at specific dates.
+A business that can collect a specific set of waste streams.
 
 | id  |      name      |                 address                 | covered streams |
 | :-: | :------------: | :-------------------------------------: | :-------------: |
