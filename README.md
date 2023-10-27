@@ -39,7 +39,7 @@ A business that can perform a collection of waste for specific streams at specif
 | id  |      name      |                 address                 | covered streams |
 | :-: | :------------: | :-------------------------------------: | :-------------: |
 |  1  |    Rewaste     |   Stationplein, 1, 1012 AB Amsterdam    |     [1, 2]      |
-|  1  | Bluecollection | Prins Hendrikkade, 1, 1012 JD Amsterdam |       [3]       |
+|  2  | Bluecollection | Prins Hendrikkade, 1, 1012 JD Amsterdam |       [3]       |
 
 #### Service Provider Covered Streams
 
