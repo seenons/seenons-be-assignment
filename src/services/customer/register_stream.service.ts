@@ -1,6 +1,8 @@
 import { CustomerRepository } from '../../providers/adapters/customer.repository';
 import { CustomerEntity } from '../../providers/entities/customer.entity';
 import * as crypto from 'crypto';
+import { WasteStreamEntity } from '../../providers/entities/waste_stream.entity';
+import { ServiceProviderEntity } from '../../providers/entities/service_provider.entity';
 
 /*
   2. Refactoring
@@ -8,18 +10,18 @@ import * as crypto from 'crypto';
 export type RegisterStreamResponse =
   | CustomerEntity
   | {
-      error: string;
-    };
+  error: string;
+};
 
 export class RegisterStreamService {
-  constructor(private readonly customerRepository: CustomerRepository) {}
+  constructor(private readonly customerRepository: CustomerRepository) {
+  }
 
   public registerStream(
     customerId: string,
     streamId: string,
     serviceProviderId: string,
     pickupDate: Date,
-    quantity: number,
   ): RegisterStreamResponse {
     const customer = this.customerRepository.findById(customerId);
 
@@ -42,12 +44,11 @@ export class RegisterStreamService {
       - Can you spot improvements to avoid duplicates? (immutability vs mutability perhaps?)
     */
 
-    customer.streams.push({
+    customer.registered_stream_pickups.push({
       id: crypto.randomUUID(),
-      stream_id: streamId,
-      service_provider_id: serviceProviderId,
+      waste_stream: new WasteStreamEntity(),
+      service_provider: new ServiceProviderEntity(),
       pickup_date: pickupDate,
-      quantity: quantity,
     });
 
     this.customerRepository.save(customer);

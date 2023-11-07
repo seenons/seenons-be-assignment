@@ -1,8 +1,8 @@
-import { CustomerStreamsEntity } from './customer_streams.entity';
+import { RegisteredStreamPickupEntity } from './customer_streams.entity';
 
 export class CustomerEntity {
   id!: string;
   name!: string;
   address!: string;
-  streams!: CustomerStreamsEntity[];
+  registered_stream_pickups!: RegisteredStreamPickupEntity[];
 }
