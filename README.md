@@ -111,9 +111,9 @@ A "scheduled" pickup registered by a customer to be performed by a Service Provi
 
 | id | stream_id | service_provider_id | pickup_date |
 |:--:|:---------:|:-------------------:|-------------|
-| 1  |   paper   |          1          | 2023-10-01  |
-| 2  |   metal   |          2          | 2023-10-01  |
-| 3  |   metal   |          2          | 2023-10-02  |
+| 1  |   paper   |          1          | 2023-10-02  |
+| 2  |   metal   |          2          | 2023-10-04  |
+| 3  |   metal   |          2          | 2023-10-06  |
 
 ## Evaluation Gates
 
