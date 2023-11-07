@@ -77,7 +77,7 @@ We have two service providers, "Unwasted" and "Bluecollection".
 Can be described as:
 The waste streams in which a service provider has covered in a postal code range, for a given set of weekdays.
 
-| id |  stream  | postal_code_start | postal_code_end |               availability_dates               |
+| id |  stream  | postal_code_start | postal_code_end |              weekday_availability              |
 |:--:|:--------:|:-----------------:|:---------------:|:----------------------------------------------:|
 | 1  | paper(1) |       1010        |      1020       |          [Monday, Tuesday, Thursday]           |
 | 2  | metal(2) |       1010        |      1020       |          [Monday, Wednesday, Friday]           |
