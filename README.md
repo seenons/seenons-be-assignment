@@ -75,7 +75,7 @@ We have two service providers, "Unwasted" and "Bluecollection".
 ### Service Provider Coverage
 
 Can be described as:
-The waste streams in which a service provider has covered in a postal code range, for a given set of weekdays.
+The waste streams a service provider can cover in a postal code range, for a given set of weekdays.
 
 | id |  stream  | postal_code_start | postal_code_end |              weekday_availability              |
 |:--:|:--------:|:-----------------:|:---------------:|:----------------------------------------------:|
