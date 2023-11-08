@@ -155,7 +155,7 @@ When searching for service providers, the expected results is:
 #### Refactoring
 
 - Refactor the response model for the customer stream pickup registration.
-- Refactor Customer streams registration use case.
+- Refactor Customer stream pickup registration use case.
     - Can you guard against business invariants?
 
 #### Opportunities
@@ -164,7 +164,7 @@ When searching for service providers, the expected results is:
 - Implement a Database Provider.
 - Implement caching strategy.
 - Can you apply a better design pattern for the overall registration and data modeling?
-- Show us your understanding of Domain Driven Design and Loose Coupling?
+- Can you show us your understanding of Domain Driven Design and Loose Coupling?
 - Can you spot opportunities for a `read-model`?
 
 ## Disclaimer
