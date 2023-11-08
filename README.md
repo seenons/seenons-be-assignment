@@ -46,6 +46,8 @@ ecosystems below.
 - Java / Kotlin
 - Python
 
+Would you rather do it in another language? Let us know beforehand!
+
 ## Data Model Representation
 
 ### Waste Stream
