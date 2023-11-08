@@ -37,12 +37,11 @@ This project is built using the following technologies:
 - TypeScript
 
 Although experience with these technologies is not a requirement to join our team, we are looking for people who will be
-able to work in this ecosystem. Your own experience will be taken into account when reviewing your assignment, so no
-need to panic if you are not familiar with them.
+able to work in this ecosystem, so we recommend you to use them.
 
-You can complete the assignment using the following ecosystems:
+If you are not familiar with these technologies, please let us know, you can also complete the assignment using the
+ecosystems below.
 
-- Node JS/TS
 - .NET (Core) 5+
 - Java / Kotlin
 - Python
@@ -104,7 +103,7 @@ A person or business entity that has waste to be collected at a given address.
 | 1  |    Seenons    |    Danzigerkade 5B, 1013 AP Amsterdam     |            [1]            |
 | 1  | Mega City One | Prins Hendrikkade, 100, 1012 JD Amsterdam |          [2, 3]           |
 
-#### Registered Stream Pickups
+### Registered Stream Pickups
 
 Can be described as:
 A "scheduled" pickup registered by a customer to be performed by a Service Provider at a given date
@@ -150,13 +149,13 @@ When searching for service providers, the expected results is:
 - Ensure completeness of the Register Stream Service Spec.
 - Ensure completeness of the Service Providers Availability Spec.
 
-### Bonus points
+### Bonus Points (not require but recommended)
 
 #### Refactoring
 
 - Refactor the response model for the customer stream pickup registration.
 - Refactor Customer stream pickup registration use case.
-    - Can you guard against business invariants?
+    - Can you find and guard against business invariants?
 
 #### Opportunities
 
