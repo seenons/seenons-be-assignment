@@ -1,11 +1,9 @@
-/*
-  4. Opportunity
-  Can you spot missing references in the CustomerStreamsEntity?
-*/
-export class CustomerStreamsEntity {
+import { WasteStreamEntity } from './waste_stream.entity';
+import { ServiceProviderEntity } from './service_provider.entity';
+
+export class RegisteredStreamPickupEntity {
   id!: string;
-  stream_id!: string;
-  service_provider_id!: string;
+  waste_stream!: WasteStreamEntity;
+  service_provider!: ServiceProviderEntity;
   pickup_date!: Date;
-  quantity!: number;
 }

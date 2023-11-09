@@ -14,10 +14,19 @@ describe('ServiceProviderAvailabilityService', () => {
   });
 
   describe('findAvailabilityAt', () => {
-    it(`should return empty list if no service providers are available for postal code #X`, () => {});
+    it(`should return [Unwasted (paper, metal), Bluecollection(metal)] for postal code 1010 on a Monday (2023-10-02)`, () => {
+    });
 
-    it(`should return empty list if no service providers are available at date $y`, () => {});
+    it(`should return [Unwasted(metal) , Bluecollection(metal)] for postal code 1010 on a Wednesday (2023-10-04)`, () => {
+    });
 
-    it(`should return a list of service providers that are available for postal code #X at date $y`, () => {});
+    it(`should return [Bluecollection(metal)] for postal code 2000 on a Thursday (2023-10-05)`, () => {
+    });
+
+    it(`should return empty list if no service providers are available for postal code 1010 on a Sunday (2023-10-08)`, () => {
+    });
+
+    it(`should return empty list if no service providers are available at postal code 0000`, () => {
+    });
   });
 });

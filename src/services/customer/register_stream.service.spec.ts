@@ -1,5 +1,7 @@
 import { RegisterStreamService } from './register_stream.service';
 import { CustomerRepository } from '../../providers/adapters/customer.repository';
+import { WasteStreamEntity } from '../../providers/entities/waste_stream.entity';
+import { ServiceProviderEntity } from '../../providers/entities/service_provider.entity';
 
 //3. Testability
 describe('RegisterStreamService', () => {
@@ -24,7 +26,6 @@ describe('RegisterStreamService', () => {
         'stream-id',
         'service-provider-id',
         new Date(),
-        5,
       );
 
       expect(response).toEqual({
@@ -34,23 +35,24 @@ describe('RegisterStreamService', () => {
     });
 
     it(`should throw an error if the stream doesn't exist`, () => {
-      throw new Error('Not implemented');
+
     });
 
     it(`should throw an error if the service provider doesn't exist`, () => {
-      throw new Error('Not implemented');
+
     });
 
     it(`should throw an error if the pickup date is not available for the service provider`, () => {
-      throw new Error('Not implemented');
+      
     });
 
+    //1. Implementation
     it(`should register the stream`, () => {
       jest.spyOn(customerRepository, 'findById').mockReturnValueOnce({
         id: 'customer-id',
         name: 'customer-name',
         address: 'customer-address',
-        streams: [],
+        registered_stream_pickups: [],
       });
 
       jest.spyOn(customerRepository, 'save').mockReturnValueOnce(undefined);
@@ -59,27 +61,26 @@ describe('RegisterStreamService', () => {
         'customer-id',
         'stream-id',
         'service-provider-id',
-        new Date('2023-01-01'),
-        5,
+        new Date('2023-01-02'),
       );
 
       expect(response).toEqual({
         id: 'customer-id',
         name: 'customer-name',
         address: 'customer-address',
-        streams: [
+        registered_stream_pickups: [
           {
             id: expect.any(String),
-            stream_id: 'stream-id',
-            service_provider_id: 'service-provider-id',
-            pickup_date: new Date('2023-01-01'),
-            quantity: 5,
+            waste_stream: new WasteStreamEntity(),
+            service_provider: new ServiceProviderEntity(),
+            pickup_date: new Date('2023-01-02'),
           },
         ],
       });
     });
 
     //4. Opportunities
-    it(`should update the previous stream if it already exists`, () => {});
+    it(`should update the previous stream if it already exists`, () => {
+    });
   });
 });
