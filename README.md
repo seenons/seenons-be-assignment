@@ -146,11 +146,11 @@ Would you rather do it in another language? Let us know beforehand!
       service_provider: The Service Provider that will pick up the Waste Stream.
       pickup_date: The date when the pickup will happen.
 
-| id  | stream_id | service_provider_id | pickup_date |
-| :-: | :-------: | :-----------------: | ----------- |
-|  1  |   paper   |          1          | 2023-10-02  |
-|  2  |   metal   |          2          | 2023-10-04  |
-|  3  |   metal   |          2          | 2023-10-06  |
+| id  |  stream  | service_provider  | pickup_date |
+| :-: | :------: | :---------------: | ----------- |
+|  1  | paper(1) |    Unwasted(1)    | 2023-10-02  |
+|  2  | metal(2) | Bluecollection(2) | 2023-10-04  |
+|  3  | metal(2) | Bluecollection(2) | 2023-10-06  |
 
 ## Evaluation Gates
 
