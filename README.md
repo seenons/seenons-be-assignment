@@ -11,10 +11,10 @@ platform!
 ---
 
     We have divided the assignment into what we called "gates", these gates are references to engineering skills that we are looking for in a future colleague.
-    Some of them are required, some of them give you bonus points.
+    Some of them are required, some of them give you bonus points. You can read more about it below.
 
     The task is to atleast complete two services
-    - Tetrieve availability of service providers for a given location and date.
+    - Retrieve availability of service providers for a given location and date.
     - Register the collection of a waste stream by a service provider.
 
     We purposely made this project framework-agnostic, and it only contains the bare minimum to perform the necessary use cases.
@@ -26,7 +26,7 @@ platform!
 ---
 
     - Make as many changes are you see fit for each evaluation gate, just make sure that these changes are functional.
-    - In case you make changes to the data model (as an opportunity), be sure to include a diagram that explains it.
+    - In case you make changes to the domain model (as an opportunity), be sure to include a diagram that explains it.
     - Ensure that test coverage is adequate and that it matches what you would deliver as a product engineer.
     - Create a new readme file that explains your take on the assignment, your thought process, and any other information that you think is relevant.
 
@@ -58,28 +58,28 @@ Would you rather do it in another language? Let us know beforehand!
 
 ### Waste Stream
 
-    Definition: 
-      A Waste Stream is an entry in our domain model, representing a specific category of waste material. 
+    Definition:
+      A Waste Stream is an entry in our domain model, representing a specific category of waste material.
       Each Waste Stream is unique and immutable, identified by specific characteristics such as its type and category (e.g., recyclable, non-recyclable, hazardous).
-    Role: 
+    Role:
       It is used to classify the waste collected and processed by Service Providers, and to match the waste disposal needs of Customers.
     Attributes:
       id: A unique identifier for the Waste Stream.
       label: A human-readable name or label for the Waste Stream (e.g., paper, metal, glass).
       category: A classification of the Waste Stream. This helps in determining the appropriate handling and processing methods.
 
-| id | label | category   |
-|----|-------|------------|
-| 1  | paper | recyclable |
-| 2  | metal | recyclable |
-| 3  | glass | recyclable |
+| id  | label | category   |
+| --- | ----- | ---------- |
+| 1   | paper | recyclable |
+| 2   | metal | recyclable |
+| 3   | glass | recyclable |
 
 ### Service Provider
 
-    Definition: 
-      The Service Provider is an entry in our domain model that represents businesses or organizations responsible for the collection and management of waste streams. 
+    Definition:
+      The Service Provider is an entry in our domain model that represents businesses or organizations responsible for the collection and management of waste streams.
       Each Service Provider has a unique identity and capabilities.
-    Role: 
+    Role:
       Service Providers are central to the waste management ecosystem. They not only collect but can also process waste streams as per environmental standards and customer requirements.
     Attributes:
       id: A unique identifier for the Service Provider.
@@ -87,16 +87,16 @@ Would you rather do it in another language? Let us know beforehand!
       address: The primary location or headquarters of the Service Provider.
       coverages: An array representation of Waste Streams that the Service Provider can handle at a given postal code range and days of the week.
 
-| id |      name      |                 address                 | coverages |
-|:--:|:--------------:|:---------------------------------------:|:---------:|
-| 1  |    Unwasted    |   Stationplein, 1, 1012 AB Amsterdam    |  [1, 2]   |
-| 2  | Bluecollection | Prins Hendrikkade, 1, 1012 JD Amsterdam |    [3]    |
+| id  |      name      |                 address                 | coverages |
+| :-: | :------------: | :-------------------------------------: | :-------: |
+|  1  |    Unwasted    |   Stationplein, 1, 1012 AB Amsterdam    |  [1, 2]   |
+|  2  | Bluecollection | Prins Hendrikkade, 1, 1012 JD Amsterdam |    [3]    |
 
 ### Service Provider Coverage
 
-    Definition: 
+    Definition:
       A relationship entity that links Service Providers with specific Waste Streams coverages.
-    Role: 
+    Role:
       It is used to determine which Service Providers are available to handle a given Waste Stream in an area for a set of days of the week.
     Attributes:
       id: A unique identifier for the Service Provider Coverage.
@@ -105,11 +105,11 @@ Would you rather do it in another language? Let us know beforehand!
       postal_code_end: The ending postal code of the area covered by the Service Provider.
       weekday_availability: An array of weekdays that the Service Provider can handle the Waste Stream.
 
-| id |  stream  | postal_code_start | postal_code_end |              weekday_availability              |
-|:--:|:--------:|:-----------------:|:---------------:|:----------------------------------------------:|
-| 1  | paper(1) |       1010        |      1020       |          [Monday, Tuesday, Thursday]           |
-| 2  | metal(2) |       1010        |      1020       |          [Monday, Wednesday, Friday]           |
-| 3  | metal(2) |       1000        |      9999       | [Monday, Tuesday, Wednesday, Thursday, Friday] |
+| id  |  stream  | postal_code_start | postal_code_end |              weekday_availability              |
+| :-: | :------: | :---------------: | :-------------: | :--------------------------------------------: |
+|  1  | paper(1) |       1010        |      1020       |          [Monday, Tuesday, Thursday]           |
+|  2  | metal(2) |       1010        |      1020       |          [Monday, Wednesday, Friday]           |
+|  3  | metal(2) |       1000        |      9999       | [Monday, Tuesday, Wednesday, Thursday, Friday] |
 
     This means that "Unwasted" can:
       - Collect Paper in the postal code range 1010-1020 on [Monday, Tuesday, Wednesday] .
@@ -120,25 +120,25 @@ Would you rather do it in another language? Let us know beforehand!
 
 ### Customer
 
-    Definition: 
+    Definition:
       A Customer is an Entity in our domain model that represents a person or business entity that has waste to be collected at a given address.
-    Role: 
+    Role:
       Customers are the ones that request the collection of waste streams.
     Attributes:
       id: A unique identifier for the Customer.
       name: The name of the Customer.
       address: The address of the Customer.
 
-| id |     name      |                  address                  | registered_stream_pickups |
-|:--:|:-------------:|:-----------------------------------------:|:-------------------------:|
-| 1  |    Seenons    |    Danzigerkade 5B, 1013 AP Amsterdam     |            [1]            |
-| 1  | Mega City One | Prins Hendrikkade, 100, 1012 JD Amsterdam |          [2, 3]           |
+| id  |     name      |                  address                  | registered_stream_pickups |
+| :-: | :-----------: | :---------------------------------------: | :-----------------------: |
+|  1  |    Seenons    |    Danzigerkade 5B, 1013 AP Amsterdam     |            [1]            |
+|  2  | Mega City One | Prins Hendrikkade, 100, 1012 JD Amsterdam |          [2, 3]           |
 
 ### Registered Stream Pickups
 
-    Definition: 
+    Definition:
       A Registered Stream Pickup is an Entity in our domain model that represents a scheduled pickup of a Waste Stream by a Service Provider at a given date.
-    Role: 
+    Role:
       It is used to register a pickup of a Waste Stream by a Service Provider at a given date.
     Attributes:
       id: A unique identifier for the Registered Stream Pickup.
@@ -146,11 +146,11 @@ Would you rather do it in another language? Let us know beforehand!
       service_provider: The Service Provider that will pick up the Waste Stream.
       pickup_date: The date when the pickup will happen.
 
-| id | stream_id | service_provider_id | pickup_date |
-|:--:|:---------:|:-------------------:|-------------|
-| 1  |   paper   |          1          | 2023-10-02  |
-| 2  |   metal   |          2          | 2023-10-04  |
-| 3  |   metal   |          2          | 2023-10-06  |
+| id  | stream_id | service_provider_id | pickup_date |
+| :-: | :-------: | :-----------------: | ----------- |
+|  1  |   paper   |          1          | 2023-10-02  |
+|  2  |   metal   |          2          | 2023-10-04  |
+|  3  |   metal   |          2          | 2023-10-06  |
 
 ## Evaluation Gates
 
@@ -161,7 +161,7 @@ Would you rather do it in another language? Let us know beforehand!
 
 ### Hard Requirements
 
---------------------
+---
 
 #### Implementation
 
@@ -174,7 +174,7 @@ Service Providers Availability
     - Ensure that when searching for availability, the expected results is:
 
 | postal_code |          date          |                      result                      |
-|:-----------:|:----------------------:|:------------------------------------------------:|
+| :---------: | :--------------------: | :----------------------------------------------: |
 |    1010     |  2023-10-02 (Monday)   | [Unwasted (paper, metal), Bluecollection(metal)] |
 |    1010     | 2023-10-04 (Wednesday) |    [Unwasted(metal) , Bluecollection(metal)]     |
 |    2000     | 2023-10-05 (Thursday)  |             [Bluecollection(metal)]              |
