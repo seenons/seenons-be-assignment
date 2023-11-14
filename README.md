@@ -120,8 +120,10 @@ Would you rather do it in another language? Let us know beforehand!
 
 ### Customer
 
-    Definition: A Customer is an Entity in our domain model that represents a person or business entity that has waste to be collected at a given address.
-    Role: Customers are the ones that request the collection of waste streams.
+    Definition: 
+      A Customer is an Entity in our domain model that represents a person or business entity that has waste to be collected at a given address.
+    Role: 
+      Customers are the ones that request the collection of waste streams.
     Attributes:
       id: A unique identifier for the Customer.
       name: The name of the Customer.
