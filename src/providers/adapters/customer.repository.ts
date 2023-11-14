@@ -5,7 +5,7 @@ export class CustomerRepository {
 
   /*
     4. Opportunity
-    Can you use a better strategy to assing values?
+    Can you use a better strategy to assign values?
   */
   public save(customer: CustomerEntity): void {
     const existingCustomer = this.findById(customer.id);
