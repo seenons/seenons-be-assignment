@@ -10,25 +10,23 @@ platform!
 
 ---
 
-    We have divided the assignment into what we called "gates", these gates are references to engineering skills that we are looking for in a future colleague.
-    Some of them are required, some of them give you bonus points. You can read more about it below.
+We have divided the assignment into what we called "gates", these gates are references to engineering skills that we are looking for in a future colleague.
+Some of them are required, some of them give you bonus points. You can read more about it below.
 
-    The task is to atleast complete two services
+    The task is to at least complete two services
     - Retrieve availability of service providers for a given location and date.
-    - Register the collection of a waste stream by a service provider.
+    - Register the collection of a waste stream to be performed by a service provider.
 
-    We purposely made this project framework-agnostic, and it only contains the bare minimum to perform the necessary use cases.
-
-    We have provided you with a domain model representation and a set of requirements that you can use as a reference to complete the assignment.
+We purposely made this project framework-agnostic, and it only contains the bare minimum to perform the necessary use cases.
 
 ## The output
 
 ---
 
-    - Make as many changes are you see fit for each evaluation gate, just make sure that these changes are functional.
-    - In case you make changes to the domain model (as an opportunity), be sure to include a diagram that explains it.
-    - Ensure that test coverage is adequate and that it matches what you would deliver as a product engineer.
-    - Create a new readme file that explains your take on the assignment, your thought process, and any other information that you think is relevant.
+    Code changes that reflect the implementation of at least the two required use cases
+    In case you make changes to the domain model (as an opportunity), include a diagram that explains it.
+    Ensure that test coverage is adequate and that it matches what you would deliver as a product engineer.
+    Create a new readme file that explains your take on the assignment, your thought process, and any other information that you believe is relevant for the review.
 
 ## Technologies Used
 
@@ -43,11 +41,11 @@ This project is built using the following technologies:
 Although experience with these technologies is not a requirement to join our team, we are looking for people who will be
 able to work in this ecosystem, so we recommend you to use them.
 
-If you are not familiar with these technologies, please let us know, you can also complete the assignment using the
-ecosystems below.
+If you are not familiar with these technologies, you can also complete the assignment using the ecosystems below.
 
 - .NET (Core) 5+
-- Java / Kotlin
+- Java
+- Kotlin
 - Python
 
 Would you rather do it in another language? Let us know beforehand!
@@ -59,8 +57,8 @@ Would you rather do it in another language? Let us know beforehand!
 ### Waste Stream
 
     Definition:
-      A Waste Stream is an entry in our domain model, representing a specific category of waste material.
-      Each Waste Stream is unique and immutable, identified by specific characteristics such as its type and category (e.g., recyclable, non-recyclable, hazardous).
+      A Waste Stream is an entry in our domain model that represents a specific category of waste material.
+      Each Waste Stream is unique and immutable, identified by specific characteristics such as its label and category (e.g., recyclable, non-recyclable, hazardous).
     Role:
       It is used to classify the waste collected and processed by Service Providers, and to match the waste disposal needs of Customers.
     Attributes:
@@ -73,6 +71,8 @@ Would you rather do it in another language? Let us know beforehand!
 | 1   | paper | recyclable |
 | 2   | metal | recyclable |
 | 3   | glass | recyclable |
+
+See: https://github.com/seenons/seenons-be-assignment/blob/main/src/providers/entities/waste_stream.entity.ts
 
 ### Service Provider
 
@@ -92,10 +92,12 @@ Would you rather do it in another language? Let us know beforehand!
 |  1  |    Unwasted    |   Stationplein, 1, 1012 AB Amsterdam    |  [1, 2]   |
 |  2  | Bluecollection | Prins Hendrikkade, 1, 1012 JD Amsterdam |    [3]    |
 
+See: https://github.com/seenons/seenons-be-assignment/blob/main/src/providers/entities/service_provider.entity.ts
+
 ### Service Provider Coverage
 
     Definition:
-      A relationship entity that links Service Providers with specific Waste Streams coverages.
+      A relational entity that links Service Providers with specific Waste Streams coverages.
     Role:
       It is used to determine which Service Providers are available to handle a given Waste Stream in an area for a set of days of the week.
     Attributes:
@@ -118,6 +120,8 @@ Would you rather do it in another language? Let us know beforehand!
     While "Bluecollection" can:
       - Collect Metal in the postal code range 0000-9999 on [Monday, Tuesday, Wednesday, Thursday, Friday].
 
+See: https://github.com/seenons/seenons-be-assignment/blob/main/src/providers/entities/service_provider_coverage.entity.ts
+
 ### Customer
 
     Definition:
@@ -128,11 +132,14 @@ Would you rather do it in another language? Let us know beforehand!
       id: A unique identifier for the Customer.
       name: The name of the Customer.
       address: The address of the Customer.
+      postal_code: The postal code referred to the address.
 
-| id  |     name      |                  address                  | registered_stream_pickups |
-| :-: | :-----------: | :---------------------------------------: | :-----------------------: |
-|  1  |    Seenons    |    Danzigerkade 5B, 1013 AP Amsterdam     |            [1]            |
-|  2  | Mega City One | Prins Hendrikkade, 100, 1012 JD Amsterdam |          [2, 3]           |
+| id  |     name      |                  address                  | postal_code | registered_stream_pickups |
+| :-: | :-----------: | :---------------------------------------: | :---------: | :-----------------------: |
+|  1  |    Seenons    |    Danzigerkade 5B, 1013 AP Amsterdam     |    1015     |          [1, 2]           |
+|  2  | Mega City One | Prins Hendrikkade, 100, 1012 JD Amsterdam |    2000     |          [3, 4]           |
+
+See: https://github.com/seenons/seenons-be-assignment/blob/main/src/providers/entities/customer.entity.ts
 
 ### Registered Stream Pickups
 
@@ -149,8 +156,11 @@ Would you rather do it in another language? Let us know beforehand!
 | id  |  stream  | service_provider  | pickup_date |
 | :-: | :------: | :---------------: | ----------- |
 |  1  | paper(1) |    Unwasted(1)    | 2023-10-02  |
-|  2  | metal(2) | Bluecollection(2) | 2023-10-04  |
-|  3  | metal(2) | Bluecollection(2) | 2023-10-06  |
+|  2  | metal(2) |    Unwasted(1)    | 2023-10-04  |
+|  3  | metal(2) | Bluecollection(2) | 2023-10-04  |
+|  4  | metal(2) | Bluecollection(2) | 2023-10-06  |
+
+See: https://github.com/seenons/seenons-be-assignment/blob/main/src/providers/entities/registered_stream_pickup.entity.ts
 
 ## Evaluation Gates
 
@@ -159,7 +169,7 @@ Would you rather do it in another language? Let us know beforehand!
 3. Testability
 4. Opportunities
 
-### Hard Requirements
+### Requirements
 
 ---
 
@@ -186,7 +196,7 @@ Service Providers Availability
     - Ensure completeness of the Register Stream Service Spec.
     - Ensure completeness of the Service Providers Availability Spec.
 
-### Bonus Points (not require but recommended)
+### Bonus Points (not required but a nice to have)
 
 #### Refactoring
 

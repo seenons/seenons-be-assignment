@@ -1,8 +1,8 @@
 import { CustomerRepository } from '../../providers/adapters/customer.repository';
 import { CustomerEntity } from '../../providers/entities/customer.entity';
-import * as crypto from 'crypto';
 import { WasteStreamEntity } from '../../providers/entities/waste_stream.entity';
 import { ServiceProviderEntity } from '../../providers/entities/service_provider.entity';
+import * as crypto from 'crypto';
 
 /*
   2. Refactoring
@@ -10,12 +10,11 @@ import { ServiceProviderEntity } from '../../providers/entities/service_provider
 export type RegisterStreamResponse =
   | CustomerEntity
   | {
-  error: string;
-};
+      error: string;
+    };
 
 export class RegisterStreamService {
-  constructor(private readonly customerRepository: CustomerRepository) {
-  }
+  constructor(private readonly customerRepository: CustomerRepository) {}
 
   public registerStream(
     customerId: string,
@@ -36,6 +35,7 @@ export class RegisterStreamService {
       - How do you make sure the stream exists?
       - How do you make sure the service provider exists?
       - How do you make sure that the pickup date is available for the service provider?
+      - How do you make sure that the customer in question is within the service provider's area?
 
       4. Opportunities
       - How about a Rich Domain Model instead of an Anemic Domain Model?
