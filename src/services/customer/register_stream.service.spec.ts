@@ -37,7 +37,6 @@ function createMockWasteStream(overrides = {}): WasteStreamEntity {
   }
 }
 
-//3. Testability
 describe('RegisterStreamService', () => {
   let customerRepository: CustomerRepository;
   let registerStreamService: RegisterStreamService;
@@ -129,7 +128,7 @@ describe('RegisterStreamService', () => {
     it(`should update the previous stream if it already exists`, () => {
       // I need clarification here, because I'm not sure how you could be certain you want to update a previous stream vs create a new one
       // Seems like if the date or waste stream is different, then those could just be additional new pickups to schedule and not necessarily an update
-      // However if the service provider is different, that seems unlikely it would be a new pickup and most likely a change, so I'll go forward with assuming that is possible...
+      // However if only the service provider is different, that seems unlikely it would be a new pickup and most likely a change, so I'll go forward with assuming that is possible...
       const customer = createMockCustomer();
       const wasteStream = createMockWasteStream();
       const serviceProvider = createMockServiceProvider();

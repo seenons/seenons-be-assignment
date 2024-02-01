@@ -7,7 +7,7 @@ export class ServiceProviderEntity {
   coverages!: ServiceProviderCoverageEntity[];
 
   public isDateAvailableForPostalCode(pickupDate: Date, postalCode: string): boolean {
-    const dayOfWeek = pickupDate.getDay() + 1;
+    const dayOfWeek = pickupDate.getDay() === 0 ? 7 : pickupDate.getDay() + 1;
   // Wasn't sure if coverage areas could potentially overlap? So made the assumption that they could
     const validCoverages = this.coverages.filter(coverage =>
       postalCode >= coverage.postal_code_start &&
