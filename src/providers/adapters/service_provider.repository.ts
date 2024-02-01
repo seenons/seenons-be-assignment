@@ -4,8 +4,10 @@ import { ServiceProviderEntity } from '../entities/service_provider.entity';
 export class ServiceProviderRepository {
   constructor(private serviceProviders: ServiceProviderEntity[] = []) {
   }
-  
-  public get(): ServiceProviderEntity[] | null {
-    return null;
+
+  public findById(id: string): ServiceProviderEntity | undefined {
+    return this.serviceProviders.find(sp => sp.id==id);
   }
+  
+  
 }
