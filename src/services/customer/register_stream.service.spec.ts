@@ -5,6 +5,8 @@ import { WasteStreamCategory, WasteStreamEntity } from '../../providers/entities
 import { ServiceProviderEntity } from '../../providers/entities/service_provider.entity';
 import { ServiceProviderRepository } from '../../providers/adapters/service_provider.repository';
 import { WasteStreamRepository } from '../../providers/adapters/waste_stream.repository';
+import { RegisterStreamResponse } from './register_stream.service';
+import { RegisteredStreamPickupRepository } from '../../providers/adapters/registered_stream_pickup.respository';
 
 function createMockServiceProvider(overrides = {}): ServiceProviderEntity {
   const mockServiceProvider = new ServiceProviderEntity();
@@ -23,7 +25,6 @@ function createMockCustomer(overrides = {}): CustomerEntity {
     name: 'customer-name',
     address: 'customer-address',
     postal_code: '1000',
-    registered_stream_pickups: [],
     ...overrides
   };
 }
@@ -42,12 +43,14 @@ describe('RegisterStreamService', () => {
   let registerStreamService: RegisterStreamService;
   let serviceProviderRepository: ServiceProviderRepository;
   let wasteStreamRepository: WasteStreamRepository;
+  let registeredStreamPickupRepository: RegisteredStreamPickupRepository;
 
   beforeEach(() => {
     customerRepository = new CustomerRepository();
     serviceProviderRepository = new ServiceProviderRepository();
     wasteStreamRepository = new WasteStreamRepository();
-    registerStreamService = new RegisterStreamService(customerRepository, serviceProviderRepository, wasteStreamRepository);
+    registeredStreamPickupRepository = new RegisteredStreamPickupRepository();
+    registerStreamService = new RegisterStreamService(customerRepository, serviceProviderRepository, wasteStreamRepository, registeredStreamPickupRepository);
   });
 
   afterEach(() => {
@@ -58,7 +61,7 @@ describe('RegisterStreamService', () => {
     it(`should throw an error if the customer doesn't exist`, () => {
       jest.spyOn(customerRepository, 'findById').mockReturnValueOnce(undefined);
       const response = registerStreamService.registerStream('customer-id','stream-id','service-provider-id',new Date());
-      expect(response).toEqual({error: 'Customer not found'});
+      expect(response).toEqual({error: 'Customer not found', success: false});
       expect(customerRepository.findById).toHaveBeenCalledWith('customer-id');
     });
 
@@ -68,7 +71,7 @@ describe('RegisterStreamService', () => {
       jest.spyOn(wasteStreamRepository, 'findById').mockReturnValueOnce(undefined);
       
       const response = registerStreamService.registerStream('customer-id','stream-id','service-provider-id',new Date());
-      expect(response).toEqual({error: 'Waste Stream not found'});
+      expect(response).toEqual({error: 'Waste Stream not found', success: false});
       expect(wasteStreamRepository.findById).toHaveBeenCalledWith('stream-id');
     });
 
@@ -78,7 +81,7 @@ describe('RegisterStreamService', () => {
       jest.spyOn(wasteStreamRepository, 'findById').mockReturnValueOnce(createMockWasteStream());
 
       const response = registerStreamService.registerStream('customer-id','stream-id','service-provider-id',new Date());
-      expect(response).toEqual({error: 'Service Provider not found'});
+      expect(response).toEqual({error: 'Service Provider not found', success: false});
       expect(serviceProviderRepository.findById).toHaveBeenCalledWith('service-provider-id');
     });
 
@@ -90,7 +93,7 @@ describe('RegisterStreamService', () => {
       jest.spyOn(wasteStreamRepository, 'findById').mockReturnValueOnce(createMockWasteStream());
 
       const response = registerStreamService.registerStream('customer-id','stream-id','service-provider-id',new Date());
-      expect(response).toEqual({error: 'Date unavailable for postal code'})
+      expect(response).toEqual({error: 'Date unavailable for postal code', success: false})
     });
   });
 
@@ -103,25 +106,21 @@ describe('RegisterStreamService', () => {
       jest.spyOn(customerRepository, 'findById').mockReturnValueOnce(customer);
       jest.spyOn(serviceProviderRepository, 'findById').mockReturnValueOnce(serviceProvider);
       jest.spyOn(wasteStreamRepository, 'findById').mockReturnValueOnce(wasteStream);
-      jest.spyOn(customerRepository, 'save').mockReturnValueOnce(undefined);
 
       const response = registerStreamService.registerStream('customer-id','stream-id','service-provider-id',new Date('2023-01-02'),);
 
       expect(response).toEqual({
-        id: customer.id,
-        name: customer.name,
-        address: customer.address,
-        postal_code: customer.postal_code,
-        registered_stream_pickups: [
-          {
+        success: true, 
+        data: {
+          registered_stream_pickup: {
             id: expect.any(String),
             waste_stream: wasteStream,
             service_provider: serviceProvider,
             pickup_date: new Date('2023-01-02'),
+            customer: customer,
           },
-        ],
+        },
       });
-      expect(customerRepository.save).toHaveBeenCalledTimes(1);
     });
 
     //4. Opportunities
@@ -140,9 +139,9 @@ describe('RegisterStreamService', () => {
       const differentServiceProvider = createMockServiceProvider({id: 'different-service-provider-id'});
       jest.spyOn(serviceProviderRepository, 'findById').mockReturnValueOnce(differentServiceProvider);
       const response = registerStreamService.registerStream('customer-id', 'stream-id', 'different-service-provider-id', new Date('2023-01-02'));
-      const customerResponse = response as CustomerEntity;
-      expect(customerResponse.registered_stream_pickups).toHaveLength(1);
-      expect(customerRepository.save).toHaveBeenCalledTimes(2);
+      const streamResponse = response as RegisterStreamResponse;
+      expect(streamResponse.data?.registered_stream_pickup.service_provider.id).toEqual('different-service-provider-id');
+      expect(registeredStreamPickupRepository.getPickupsForCustomer(customer.id)).toHaveLength(1);
     });
   });
 });

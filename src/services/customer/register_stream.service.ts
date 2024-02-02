@@ -1,23 +1,27 @@
 import { CustomerRepository } from '../../providers/adapters/customer.repository';
-import { CustomerEntity } from '../../providers/entities/customer.entity';
 import { ServiceProviderRepository } from '../../providers/adapters/service_provider.repository';
 import { WasteStreamRepository } from '../../providers/adapters/waste_stream.repository';
 import * as crypto from 'crypto';
+import { RegisteredStreamPickupEntity } from '../../providers/entities/registered_stream_pickup.entity';
+import { RegisteredStreamPickupRepository } from '../../providers/adapters/registered_stream_pickup.respository';
 
 /*
   2. Refactoring
 */
-export type RegisterStreamResponse =
-  | CustomerEntity
-  | {
-      error: string;
-    };
-
+export type RegisterStreamResponse = {
+  success: boolean;
+  data?: {
+    registered_stream_pickup: RegisteredStreamPickupEntity;
+  };
+  error?: string;
+};
+  
 export class RegisterStreamService {
   constructor(
     private readonly customerRepository: CustomerRepository,
     private readonly serviceProviderRepository: ServiceProviderRepository,
-    private readonly wasteStreamRepository: WasteStreamRepository) {}
+    private readonly wasteStreamRepository: WasteStreamRepository,
+    private registeredStreamPickupRepository: RegisteredStreamPickupRepository) {}
 
   public registerStream(
     customerId: string,
@@ -30,17 +34,18 @@ export class RegisterStreamService {
     const serviceProvider = this.serviceProviderRepository.findById(serviceProviderId);
 
     if (!customer) {
-      return {error: 'Customer not found',};
+      return {success: false, error: 'Customer not found'};
     }
     if (!wasteStream){
-      return {error: 'Waste Stream not found'}
+      return {success: false, error: 'Waste Stream not found'};
     }
     if (!serviceProvider) {
-      return {error: 'Service Provider not found'}
+      return {success: false, error: 'Service Provider not found'};
     }
     if (!serviceProvider.isDateAvailableForPostalCode(pickupDate, customer.postal_code)){
-      return {error: 'Date unavailable for postal code'}
-    }
+      return {success: false, error: 'Date unavailable for postal code'};
+      }
+    
 
     /*
       1. Implementation & 2. Refactoring
@@ -56,23 +61,33 @@ export class RegisterStreamService {
       - Can you spot improvements to avoid duplicates? (immutability vs mutability perhaps?)
     */
 
-    const existingPickup = customer.registered_stream_pickups.find(pickup => 
-      pickup.pickup_date.getTime() === pickupDate.getTime() &&
-      pickup.waste_stream.id === streamId);
-    if (existingPickup){
-      existingPickup.service_provider = serviceProvider;
+    let pickup = this.getMatchingDateAndWasteStreamPickup(customerId, pickupDate, streamId);
+
+    if (pickup){
+      pickup.service_provider = serviceProvider;
+      this.registeredStreamPickupRepository.update(pickup);
     }
     else {
-      customer.registered_stream_pickups.push({
-        id: crypto.randomUUID(),
-        waste_stream: wasteStream,
-        service_provider: serviceProvider,
-        pickup_date: pickupDate,
-      });
+      pickup = new RegisteredStreamPickupEntity();
+      pickup.id = crypto.randomUUID();
+      pickup.waste_stream = wasteStream;
+      pickup.service_provider = serviceProvider;
+      pickup.pickup_date = pickupDate;
+      pickup.customer = customer;
+      this.registeredStreamPickupRepository.save(pickup);
     }
 
-    this.customerRepository.save(customer);
+    return {success: true, data: {registered_stream_pickup: pickup}};
+  }
 
-    return customer;
+private getMatchingDateAndWasteStreamPickup(customerId: string, date: Date, wasteStreamId: string): RegisteredStreamPickupEntity | undefined{
+    const existingPickups = this.registeredStreamPickupRepository.getPickupsForCustomer(customerId);
+    let pickup;  
+    if(existingPickups.length > 0){
+      pickup = existingPickups.find(pu =>
+      pu.pickup_date.getTime() === date.getTime() &&        
+      pu.waste_stream.id === wasteStreamId);
+    }
+    return pickup;
   }
 }
