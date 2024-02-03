@@ -1,23 +1,27 @@
+import { DataSource, Repository } from "typeorm";
 import { RegisteredStreamPickupEntity } from "../entities/registered_stream_pickup.entity";
 
 export class RegisteredStreamPickupRepository {
-    constructor(private registeredStreamPickups: RegisteredStreamPickupEntity[] = []){}
+    private repo: Repository<RegisteredStreamPickupEntity>;
 
-    public getPickupsForCustomer(customerId: string): RegisteredStreamPickupEntity[] {
-        return this.registeredStreamPickups.filter(rsp => rsp.customer.id === customerId);
+    constructor(datasource: DataSource){
+        this.repo = datasource.getRepository(RegisteredStreamPickupEntity);
     }
 
-    public save(registeredStreamPickup: RegisteredStreamPickupEntity): void {
-        this.registeredStreamPickups.push(registeredStreamPickup);
+    public async getPickupsForCustomer(customerId: string): Promise<RegisteredStreamPickupEntity[]> {
+        return await this.repo.find({
+            where: {
+                customer: { id: customerId }
+            },
+            relations: {
+                customer: true,
+                waste_stream: true,
+                service_provider: true
+            }
+        });
     }
 
-    public update(registeredStreamPickup: RegisteredStreamPickupEntity): void {
-        const index = this.registeredStreamPickups.findIndex(rsp => rsp.id === registeredStreamPickup.id)
-        if (index !== -1){
-            this.registeredStreamPickups[index] = registeredStreamPickup;
-        }
-        else {
-            this.registeredStreamPickups.push(registeredStreamPickup);
-        }
+    public async save(registeredStreamPickup: RegisteredStreamPickupEntity): Promise<RegisteredStreamPickupEntity> {
+        return await this.repo.save(registeredStreamPickup);
     }
 }

@@ -1,26 +1,25 @@
+import { DataSource, Repository } from 'typeorm';
 import { ServiceProviderEntity } from '../entities/service_provider.entity';
 
 //1. Implementation
 export class ServiceProviderRepository {
-  constructor(private serviceProviders: ServiceProviderEntity[] = []) {
+  private repo: Repository<ServiceProviderEntity>;
+
+  constructor(datasource: DataSource) {
+    this.repo = datasource.getRepository(ServiceProviderEntity);
   }
 
-  public findById(id: string): ServiceProviderEntity | undefined {
-    return this.serviceProviders.find(sp => sp.id===id);
+  public async findById(id: string): Promise<ServiceProviderEntity | null> {
+    return await this.repo.findOneBy({id});
   }
 
-  public getServiceProviders(): ServiceProviderEntity[] {
-    return this.serviceProviders;
+  public async getServiceProviders(): Promise<ServiceProviderEntity[]> {
+    
+    return await this.repo.find();
   }
   
-  public addOrUpdateServiceProvider(serviceProvider: ServiceProviderEntity): void {
-    const index = this.serviceProviders.findIndex(sp => serviceProvider.id === sp.id)
-    if (index !== -1) {
-      this.serviceProviders[index] = serviceProvider;
-    }
-    else {
-      this.serviceProviders.push(serviceProvider);
-    }
+  public async save(serviceProvider: ServiceProviderEntity): Promise<ServiceProviderEntity> {
+    return await this.repo.save(serviceProvider);
   }
   
 }

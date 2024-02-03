@@ -1,9 +1,14 @@
+import { DataSource, Repository } from "typeorm";
 import { WasteStreamEntity } from "../entities/waste_stream.entity";
 
 export class WasteStreamRepository {
-    constructor(private wasteStreamRepository: WasteStreamEntity[] = []){}
+    private repo: Repository<WasteStreamEntity>;
 
-    public findById(id: string):  WasteStreamEntity | undefined {
-        return this.wasteStreamRepository.find(ws => ws.id == id);
+    constructor(datasource: DataSource){
+        this.repo = datasource.getRepository(WasteStreamEntity);
+    }
+
+    public async findById(id: string):  Promise<WasteStreamEntity | null> {
+        return await this.repo.findOneBy({id});
     }
 }

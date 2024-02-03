@@ -23,15 +23,15 @@ export class RegisterStreamService {
     private readonly wasteStreamRepository: WasteStreamRepository,
     private registeredStreamPickupRepository: RegisteredStreamPickupRepository) {}
 
-  public registerStream(
+  public async registerStream(
     customerId: string,
     streamId: string,
     serviceProviderId: string,
     pickupDate: Date,
-  ): RegisterStreamResponse {
-    const customer = this.customerRepository.findById(customerId);
-    const wasteStream = this.wasteStreamRepository.findById(streamId);
-    const serviceProvider = this.serviceProviderRepository.findById(serviceProviderId);
+  ): Promise<RegisterStreamResponse> {
+    const customer = await this.customerRepository.findById(customerId);
+    const wasteStream = await this.wasteStreamRepository.findById(streamId);
+    const serviceProvider = await this.serviceProviderRepository.findById(serviceProviderId);
 
     if (!customer) {
       return {success: false, error: 'Customer not found'};
@@ -61,11 +61,11 @@ export class RegisterStreamService {
       - Can you spot improvements to avoid duplicates? (immutability vs mutability perhaps?)
     */
 
-    let pickup = this.getMatchingDateAndWasteStreamPickup(customerId, pickupDate, streamId);
+    let pickup = await this.getMatchingDateAndWasteStreamPickup(customerId, pickupDate, streamId);
 
     if (pickup){
       pickup.service_provider = serviceProvider;
-      this.registeredStreamPickupRepository.update(pickup);
+      this.registeredStreamPickupRepository.save(pickup);
     }
     else {
       pickup = new RegisteredStreamPickupEntity();
@@ -80,13 +80,13 @@ export class RegisterStreamService {
     return {success: true, data: {registered_stream_pickup: pickup}};
   }
 
-private getMatchingDateAndWasteStreamPickup(customerId: string, date: Date, wasteStreamId: string): RegisteredStreamPickupEntity | undefined{
-    const existingPickups = this.registeredStreamPickupRepository.getPickupsForCustomer(customerId);
-    let pickup;  
-    if(existingPickups.length > 0){
+private async getMatchingDateAndWasteStreamPickup(customerId: string, date: Date, wasteStreamId: string): Promise<RegisteredStreamPickupEntity | null>{
+    const existingPickups = await this.registeredStreamPickupRepository.getPickupsForCustomer(customerId);
+    let pickup: RegisteredStreamPickupEntity | null = null;  
+    if(existingPickups?.length > 0){
       pickup = existingPickups.find(pu =>
       pu.pickup_date.getTime() === date.getTime() &&        
-      pu.waste_stream.id === wasteStreamId);
+      pu.waste_stream.id === wasteStreamId) || null;
     }
     return pickup;
   }

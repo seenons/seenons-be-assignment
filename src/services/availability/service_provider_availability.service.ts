@@ -9,10 +9,10 @@ import { ServiceProviderRepository } from '../../providers/adapters/service_prov
 export class ServiceProviderAvailabilityService {
   constructor(private serviceProviderRepository: ServiceProviderRepository) {}
 
-  public findAvailabilityAt(postalCode: string, date: Date): any[] {
+  public async findAvailabilityAt(postalCode: string, date: Date): Promise<any[]> {
     const availableServiceProviders: ServiceProviderEntity[] = [];
 
-    this.serviceProviderRepository.getServiceProviders().forEach(sp => {
+    (await this.serviceProviderRepository.getServiceProviders()).forEach(sp => {
       if(sp.isDateAvailableForPostalCode(date, postalCode)){
         availableServiceProviders.push(sp);
       }

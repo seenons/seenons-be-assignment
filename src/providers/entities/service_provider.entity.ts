@@ -1,9 +1,16 @@
 import { ServiceProviderCoverageEntity } from './service_provider_coverage.entity';
+import { Entity, PrimaryColumn, Column, ManyToOne, JoinTable } from 'typeorm';
 
+@Entity()
 export class ServiceProviderEntity {
+  @PrimaryColumn()
   id!: string;
+  @Column()
   name!: string;
+  @Column()
   address!: string;
+  //Consider: I think this should be ManyToMany - I don't see any reason why coverages couldn't overlap among different service providers
+  @ManyToOne(() => ServiceProviderEntity, serviceProvider => serviceProvider.coverages)
   coverages!: ServiceProviderCoverageEntity[];
 
   public isDateAvailableForPostalCode(pickupDate: Date, postalCode: string): boolean {

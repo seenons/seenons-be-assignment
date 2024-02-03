@@ -7,6 +7,7 @@ import { ServiceProviderRepository } from '../../providers/adapters/service_prov
 import { WasteStreamRepository } from '../../providers/adapters/waste_stream.repository';
 import { RegisterStreamResponse } from './register_stream.service';
 import { RegisteredStreamPickupRepository } from '../../providers/adapters/registered_stream_pickup.respository';
+import { DataSource } from 'typeorm';
 
 function createMockServiceProvider(overrides = {}): ServiceProviderEntity {
   const mockServiceProvider = new ServiceProviderEntity();
@@ -46,10 +47,18 @@ describe('RegisterStreamService', () => {
   let registeredStreamPickupRepository: RegisteredStreamPickupRepository;
 
   beforeEach(() => {
-    customerRepository = new CustomerRepository();
-    serviceProviderRepository = new ServiceProviderRepository();
-    wasteStreamRepository = new WasteStreamRepository();
-    registeredStreamPickupRepository = new RegisteredStreamPickupRepository();
+    const mockRepository = {
+      find: jest.fn(),
+      findOneBy: jest.fn(),
+      save: jest.fn(),
+    };
+    const mockDatasource = {
+      getRepository: jest.fn().mockReturnValue(mockRepository),
+    } as unknown as DataSource;
+    customerRepository = new CustomerRepository(mockDatasource);
+    serviceProviderRepository = new ServiceProviderRepository(mockDatasource);
+    wasteStreamRepository = new WasteStreamRepository(mockDatasource);
+    registeredStreamPickupRepository = new RegisteredStreamPickupRepository(mockDatasource);
     registerStreamService = new RegisterStreamService(customerRepository, serviceProviderRepository, wasteStreamRepository, registeredStreamPickupRepository);
   });
 
@@ -58,56 +67,56 @@ describe('RegisterStreamService', () => {
   });
 
   describe('registerStreamErrors', () => {
-    it(`should throw an error if the customer doesn't exist`, () => {
-      jest.spyOn(customerRepository, 'findById').mockReturnValueOnce(undefined);
-      const response = registerStreamService.registerStream('customer-id','stream-id','service-provider-id',new Date());
+    it(`should throw an error if the customer doesn't exist`, async () => {
+      jest.spyOn(customerRepository, 'findById').mockResolvedValue(null);
+      const response = await registerStreamService.registerStream('customer-id','stream-id','service-provider-id',new Date());
       expect(response).toEqual({error: 'Customer not found', success: false});
       expect(customerRepository.findById).toHaveBeenCalledWith('customer-id');
     });
 
-    it(`should throw an error if the stream doesn't exist`, () => {
-      jest.spyOn(customerRepository, 'findById').mockReturnValueOnce(createMockCustomer());
-      jest.spyOn(serviceProviderRepository, 'findById').mockReturnValueOnce(createMockServiceProvider());
-      jest.spyOn(wasteStreamRepository, 'findById').mockReturnValueOnce(undefined);
+    it(`should throw an error if the stream doesn't exist`, async () => {
+      jest.spyOn(customerRepository, 'findById').mockResolvedValue(createMockCustomer());
+      jest.spyOn(serviceProviderRepository, 'findById').mockResolvedValue(createMockServiceProvider());
+      jest.spyOn(wasteStreamRepository, 'findById').mockResolvedValue(null);
       
-      const response = registerStreamService.registerStream('customer-id','stream-id','service-provider-id',new Date());
+      const response = await registerStreamService.registerStream('customer-id','stream-id','service-provider-id',new Date());
       expect(response).toEqual({error: 'Waste Stream not found', success: false});
       expect(wasteStreamRepository.findById).toHaveBeenCalledWith('stream-id');
     });
 
-    it(`should throw an error if the service provider doesn't exist`, () => {
-      jest.spyOn(customerRepository, 'findById').mockReturnValueOnce(createMockCustomer());
-      jest.spyOn(serviceProviderRepository, 'findById').mockReturnValueOnce(undefined);
-      jest.spyOn(wasteStreamRepository, 'findById').mockReturnValueOnce(createMockWasteStream());
+    it(`should throw an error if the service provider doesn't exist`, async () => {
+      jest.spyOn(customerRepository, 'findById').mockResolvedValue(createMockCustomer());
+      jest.spyOn(serviceProviderRepository, 'findById').mockResolvedValue(null);
+      jest.spyOn(wasteStreamRepository, 'findById').mockResolvedValue(createMockWasteStream());
 
-      const response = registerStreamService.registerStream('customer-id','stream-id','service-provider-id',new Date());
+      const response = await registerStreamService.registerStream('customer-id','stream-id','service-provider-id',new Date());
       expect(response).toEqual({error: 'Service Provider not found', success: false});
       expect(serviceProviderRepository.findById).toHaveBeenCalledWith('service-provider-id');
     });
 
-    it(`should throw an error if the customer is not in the postal code zone of service provider`, () => {
-      jest.spyOn(customerRepository, 'findById').mockReturnValueOnce(createMockCustomer());
+    it(`should throw an error if the customer is not in the postal code zone of service provider`, async () => {
+      jest.spyOn(customerRepository, 'findById').mockResolvedValue(createMockCustomer());
       const mockServiceProvider = createMockServiceProvider();
-      jest.spyOn(serviceProviderRepository, 'findById').mockReturnValueOnce(mockServiceProvider);
+      jest.spyOn(serviceProviderRepository, 'findById').mockResolvedValue(mockServiceProvider);
       jest.spyOn(mockServiceProvider, 'isDateAvailableForPostalCode').mockImplementation(() => false);
-      jest.spyOn(wasteStreamRepository, 'findById').mockReturnValueOnce(createMockWasteStream());
+      jest.spyOn(wasteStreamRepository, 'findById').mockResolvedValue(createMockWasteStream());
 
-      const response = registerStreamService.registerStream('customer-id','stream-id','service-provider-id',new Date());
+      const response = await registerStreamService.registerStream('customer-id','stream-id','service-provider-id',new Date());
       expect(response).toEqual({error: 'Date unavailable for postal code', success: false})
     });
   });
 
   describe('registerStream', () => {
     //1. Implementation
-    it(`should register the stream`, () => {
+    it(`should register the stream`, async () => {
       const customer = createMockCustomer();
       const wasteStream = createMockWasteStream();
       const serviceProvider = createMockServiceProvider();
-      jest.spyOn(customerRepository, 'findById').mockReturnValueOnce(customer);
-      jest.spyOn(serviceProviderRepository, 'findById').mockReturnValueOnce(serviceProvider);
-      jest.spyOn(wasteStreamRepository, 'findById').mockReturnValueOnce(wasteStream);
+      jest.spyOn(customerRepository, 'findById').mockResolvedValue(customer);
+      jest.spyOn(serviceProviderRepository, 'findById').mockResolvedValue(serviceProvider);
+      jest.spyOn(wasteStreamRepository, 'findById').mockResolvedValue(wasteStream);
 
-      const response = registerStreamService.registerStream('customer-id','stream-id','service-provider-id',new Date('2023-01-02'),);
+      const response = await registerStreamService.registerStream('customer-id','stream-id','service-provider-id',new Date('2023-01-02'),);
 
       expect(response).toEqual({
         success: true, 
@@ -124,24 +133,26 @@ describe('RegisterStreamService', () => {
     });
 
     //4. Opportunities
-    it(`should update the previous stream if it already exists`, () => {
+    it(`should update the previous stream if it already exists`, async () => {
       // I need clarification here, because I'm not sure how you could be certain you want to update a previous stream vs create a new one
       // Seems like if the date or waste stream is different, then those could just be additional new pickups to schedule and not necessarily an update
       // However if only the service provider is different, that seems unlikely it would be a new pickup and most likely a change, so I'll go forward with assuming that is possible...
       const customer = createMockCustomer();
       const wasteStream = createMockWasteStream();
       const serviceProvider = createMockServiceProvider();
-      jest.spyOn(customerRepository, 'findById').mockReturnValue(customer);
-      jest.spyOn(serviceProviderRepository, 'findById').mockReturnValueOnce(serviceProvider);
-      jest.spyOn(wasteStreamRepository, 'findById').mockReturnValue(wasteStream);
-      jest.spyOn(customerRepository, 'save').mockReturnValue(undefined);
-      registerStreamService.registerStream('customer-id','stream-id','service-provider-id',new Date('2023-01-02'));
+      jest.spyOn(customerRepository, 'findById').mockResolvedValue(customer);
+      jest.spyOn(serviceProviderRepository, 'findById').mockResolvedValueOnce(serviceProvider);
+      jest.spyOn(wasteStreamRepository, 'findById').mockResolvedValue(wasteStream);
+      jest.spyOn(customerRepository, 'save').mockResolvedValue(customer);
+      const response1 = await registerStreamService.registerStream('customer-id','stream-id','service-provider-id',new Date('2023-01-02'));
+      const originalPickup = response1.data!.registered_stream_pickup;
       const differentServiceProvider = createMockServiceProvider({id: 'different-service-provider-id'});
-      jest.spyOn(serviceProviderRepository, 'findById').mockReturnValueOnce(differentServiceProvider);
-      const response = registerStreamService.registerStream('customer-id', 'stream-id', 'different-service-provider-id', new Date('2023-01-02'));
-      const streamResponse = response as RegisterStreamResponse;
-      expect(streamResponse.data?.registered_stream_pickup.service_provider.id).toEqual('different-service-provider-id');
-      expect(registeredStreamPickupRepository.getPickupsForCustomer(customer.id)).toHaveLength(1);
+      jest.spyOn(serviceProviderRepository, 'findById').mockResolvedValueOnce(differentServiceProvider);
+      jest.spyOn(registeredStreamPickupRepository, 'getPickupsForCustomer').mockResolvedValueOnce([originalPickup]);
+      const response2 = await registerStreamService.registerStream('customer-id', 'stream-id', 'different-service-provider-id', new Date('2023-01-02'));
+      
+      expect(response2.data?.registered_stream_pickup.service_provider.id).toEqual('different-service-provider-id');
+      expect(response2.data?.registered_stream_pickup).toEqual(response1.data?.registered_stream_pickup);
     });
   });
 });

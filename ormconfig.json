@@ -1,0 +1,14 @@
+{
+    "type": "mysql",
+    "host": "my-rds-host.amazonaws.com",
+    "port": 3306,
+    "username": "my-username",
+    "password": "my-password",
+    "database": "my-database-name",
+    "synchronize": true,
+    "logging": false,
+    "entities": [
+      "src/providers/entities/**/*.entity.ts"
+    ]
+  }
+  
