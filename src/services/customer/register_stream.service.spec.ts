@@ -5,9 +5,9 @@ import { WasteStreamCategory, WasteStreamEntity } from '../../providers/entities
 import { ServiceProviderEntity } from '../../providers/entities/service_provider.entity';
 import { ServiceProviderRepository } from '../../providers/adapters/service_provider.repository';
 import { WasteStreamRepository } from '../../providers/adapters/waste_stream.repository';
-import { RegisterStreamResponse } from './register_stream.service';
 import { RegisteredStreamPickupRepository } from '../../providers/adapters/registered_stream_pickup.respository';
 import { DataSource } from 'typeorm';
+import { InMemoryCache } from '../../providers/cache/in_memory_cache';
 
 function createMockServiceProvider(overrides = {}): ServiceProviderEntity {
   const mockServiceProvider = new ServiceProviderEntity();
@@ -58,7 +58,7 @@ describe('RegisterStreamService', () => {
     customerRepository = new CustomerRepository(mockDatasource);
     serviceProviderRepository = new ServiceProviderRepository(mockDatasource);
     wasteStreamRepository = new WasteStreamRepository(mockDatasource);
-    registeredStreamPickupRepository = new RegisteredStreamPickupRepository(mockDatasource);
+    registeredStreamPickupRepository = new RegisteredStreamPickupRepository(mockDatasource, new InMemoryCache());
     registerStreamService = new RegisterStreamService(customerRepository, serviceProviderRepository, wasteStreamRepository, registeredStreamPickupRepository);
   });
 
@@ -144,11 +144,13 @@ describe('RegisterStreamService', () => {
       jest.spyOn(serviceProviderRepository, 'findById').mockResolvedValueOnce(serviceProvider);
       jest.spyOn(wasteStreamRepository, 'findById').mockResolvedValue(wasteStream);
       jest.spyOn(customerRepository, 'save').mockResolvedValue(customer);
+      
       const response1 = await registerStreamService.registerStream('customer-id','stream-id','service-provider-id',new Date('2023-01-02'));
       const originalPickup = response1.data!.registered_stream_pickup;
       const differentServiceProvider = createMockServiceProvider({id: 'different-service-provider-id'});
       jest.spyOn(serviceProviderRepository, 'findById').mockResolvedValueOnce(differentServiceProvider);
       jest.spyOn(registeredStreamPickupRepository, 'getPickupsForCustomer').mockResolvedValueOnce([originalPickup]);
+      jest.spyOn(registeredStreamPickupRepository, 'save').mockResolvedValueOnce(originalPickup);
       const response2 = await registerStreamService.registerStream('customer-id', 'stream-id', 'different-service-provider-id', new Date('2023-01-02'));
       
       expect(response2.data?.registered_stream_pickup.service_provider.id).toEqual('different-service-provider-id');
