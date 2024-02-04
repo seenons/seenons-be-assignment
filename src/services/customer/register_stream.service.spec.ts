@@ -5,7 +5,7 @@ import { WasteStreamCategory, WasteStreamEntity } from '../../providers/entities
 import { ServiceProviderEntity } from '../../providers/entities/service_provider.entity';
 import { ServiceProviderRepository } from '../../providers/adapters/service_provider.repository';
 import { WasteStreamRepository } from '../../providers/adapters/waste_stream.repository';
-import { RegisteredStreamPickupRepository } from '../../providers/adapters/registered_stream_pickup.respository';
+import { RegisteredStreamPickupRepository } from '../../providers/adapters/registered_stream_pickup.repository';
 import { DataSource } from 'typeorm';
 import { InMemoryCache } from '../../providers/cache/in_memory_cache';
 
@@ -157,4 +157,5 @@ describe('RegisterStreamService', () => {
       expect(response2.data?.registered_stream_pickup).toEqual(response1.data?.registered_stream_pickup);
     });
   });
+
 });

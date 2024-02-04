@@ -3,7 +3,7 @@ import { ServiceProviderRepository } from '../../providers/adapters/service_prov
 import { WasteStreamRepository } from '../../providers/adapters/waste_stream.repository';
 import * as crypto from 'crypto';
 import { RegisteredStreamPickupEntity } from '../../providers/entities/registered_stream_pickup.entity';
-import { RegisteredStreamPickupRepository } from '../../providers/adapters/registered_stream_pickup.respository';
+import { RegisteredStreamPickupRepository } from '../../providers/adapters/registered_stream_pickup.repository';
 
 /*
   2. Refactoring
@@ -55,21 +55,26 @@ export class RegisterStreamService {
       - How do you make sure that the customer in question is within the service provider's area? done
 
       4. Opportunities
-      - How about a Rich Domain Model instead of an Anemic Domain Model?
+      - How about a Rich Domain Model instead of an Anemic Domain Model? - pros and cons to each approach
       - How about a Domain Event to notify the service provider?
       - How about a Domain Event to notify the customer?
-      - Can you spot improvements to avoid duplicates? (immutability vs mutability perhaps?)
+      - Can you spot improvements to avoid duplicates? (immutability vs mutability perhaps?) - done
     */
 
     let pickup = await this.getMatchingDateAndWasteStreamPickup(customerId, pickupDate, streamId);
 
-    if (pickup){
-      pickup.service_provider = serviceProvider;
-      this.registeredStreamPickupRepository.save(pickup);
+    if (pickup) {
+      // if customer has an existing pickup, either we have a perfect dup or perhaps they are trying to 
+      // change service providers.    Check this and save changes if any.  Immutable objects would require
+      // we delete the old object and save a new one here
+      if (pickup.service_provider != serviceProvider) {
+        pickup.service_provider = serviceProvider;
+        this.registeredStreamPickupRepository.save(pickup);  
+      }
     }
     else {
       pickup = new RegisteredStreamPickupEntity();
-      pickup.id = crypto.randomUUID();
+      pickup.id = crypto.randomUUID();  // TODO - use automatic primary key generation in db
       pickup.waste_stream = wasteStream;
       pickup.service_provider = serviceProvider;
       pickup.pickup_date = pickupDate;

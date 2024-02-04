@@ -1,5 +1,5 @@
 import { ServiceProviderCoverageEntity } from './service_provider_coverage.entity';
-import { Entity, PrimaryColumn, Column, ManyToOne, JoinTable } from 'typeorm';
+import { Entity, PrimaryColumn, Column, ManyToOne } from 'typeorm';
 
 @Entity()
 export class ServiceProviderEntity {
@@ -9,7 +9,7 @@ export class ServiceProviderEntity {
   name!: string;
   @Column()
   address!: string;
-  //Consider: I think this should be ManyToMany - I don't see any reason why coverages couldn't overlap among different service providers
+  // Consider: I think this could be ManyToMany - could the same coverage entity be used by different service providers?
   @ManyToOne(() => ServiceProviderEntity, serviceProvider => serviceProvider.coverages)
   coverages!: ServiceProviderCoverageEntity[];
 
@@ -22,6 +22,5 @@ export class ServiceProviderEntity {
       coverage.weekday_availability.includes(dayOfWeek));
 
     return validCoverages.length > 0;
-
   }
 }
