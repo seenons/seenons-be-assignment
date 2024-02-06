@@ -167,7 +167,7 @@ Service Providers Availability
 
 #### Opportunities
 
-- Implement a Database Provider and whatever layer of communication you deem neccessary?
+- Implement a Database Provider and whatever layer of communication you deem neccessary.
 - Can you implement a caching strategy somewhere?
 - Can you apply a better design pattern for the overall registration and data modeling following concepts around Rich Domains?
 - Can you show us your understanding of Loose Coupling and Single Responsiblity?
