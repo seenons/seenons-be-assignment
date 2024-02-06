@@ -1,23 +1,22 @@
+import { DataSource, Repository } from 'typeorm';
 import { CustomerEntity } from '../entities/customer.entity';
 
 export class CustomerRepository {
-  private readonly customers: CustomerEntity[] = [];
+  private repo: Repository<CustomerEntity>;
+
+  constructor(datasource: DataSource){
+    this.repo = datasource.getRepository(CustomerEntity);
+  }
 
   /*
     4. Opportunity
     Can you use a better strategy to assign values?
   */
-  public save(customer: CustomerEntity): void {
-    const existingCustomer = this.findById(customer.id);
-
-    if (existingCustomer) {
-      Object.assign(existingCustomer, customer);
-    } else {
-      this.customers.push(customer);
-    }
+  public async save(customer: CustomerEntity): Promise<CustomerEntity> {
+    return await this.repo.save(customer);
   }
 
-  public findById(id: string): CustomerEntity | undefined {
-    return this.customers.find(customer => customer.id === id);
+  public async findById(id: string): Promise<CustomerEntity | null> {
+    return await this.repo.findOneBy({id});
   }
 }

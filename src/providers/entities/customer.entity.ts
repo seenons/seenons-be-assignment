@@ -1,9 +1,16 @@
-import { RegisteredStreamPickupEntity } from './registered_stream_pickup.entity';
+import { Entity, PrimaryColumn, Column } from 'typeorm';
 
+@Entity()
 export class CustomerEntity {
+  @PrimaryColumn()
   id!: string;
+
+  @Column()
   name!: string;
+  
+  @Column()
   address!: string;
+
+  @Column()
   postal_code!: string;
-  registered_stream_pickups!: RegisteredStreamPickupEntity[];
 }
