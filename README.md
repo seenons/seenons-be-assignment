@@ -21,7 +21,7 @@ You can use the provided code as a starting point or rebuild it however you see 
 
 ---
 
-- Create a copy of this repository, do not fork it.
+- Create a **private** copy of this repository. Do not fork it.
 - Create a new readme file that explains your take on the assignment, your thought process, and any other information that you believe is relevant for the review.
 - Implement the necessary changes to at least achieve the requirements.
 - Invite <caio@seenons.com> as a collaborator to your private repository.
