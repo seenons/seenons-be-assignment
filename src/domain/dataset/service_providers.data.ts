@@ -1,6 +1,6 @@
 import { ServiceProvider } from '@domain/service_provider';
 import { Weekday } from '@domain/service_provider_coverage';
-import { WasteStreamCategory } from '@domain/waste_stream';
+import { metal, paper } from './waste_streams.data';
 
 export const serviceProviders: Array<ServiceProvider> = [
   {
@@ -12,22 +12,14 @@ export const serviceProviders: Array<ServiceProvider> = [
         id: '1',
         postal_code_start: '1010',
         postal_code_end: '1020',
-        waste_stream: {
-          id: '1',
-          label: 'Paper',
-          category: WasteStreamCategory.recyclable,
-        },
+        waste_stream: paper,
         weekday_availability: [Weekday.Monday, Weekday.Tuesday, Weekday.Thursday],
       },
       {
         id: '2',
         postal_code_start: '1010',
         postal_code_end: '1020',
-        waste_stream: {
-          id: '2',
-          label: 'Metal',
-          category: WasteStreamCategory.recyclable,
-        },
+        waste_stream: metal,
         weekday_availability: [Weekday.Monday, Weekday.Wednesday, Weekday.Friday],
       },
     ],
@@ -41,11 +33,7 @@ export const serviceProviders: Array<ServiceProvider> = [
         id: '3',
         postal_code_start: '1020',
         postal_code_end: '9999',
-        waste_stream: {
-          id: '2',
-          label: 'Metal',
-          category: WasteStreamCategory.recyclable,
-        },
+        waste_stream: metal,
         weekday_availability: [
           Weekday.Monday,
           Weekday.Tuesday,

@@ -2,51 +2,41 @@
 
 Hello there!
 
-At Seenons, we are building a platform to support a circular economy. This encompasses collection, transportation and re-purposing of different waste streams and our assignment is a subset of what we do.
+At Seenons, we are building a platform to support a circular economy. This encompasses collection, transportation, and re-purposing of different waste streams. The assignment you're about to undertake directly addresses two core aspects of our platform, which are integral to our mission:
 
-Here we will go through two correlated business cases that are somewhat similar to what we do at Seenons.
+- **Finding service providers for waste collection**:
+  Enabling our customers to locate service providers who can collect their waste on a specified date.
+- **Registering a waste pickup**:
+  Allowing our customers to schedule a waste pickup with a service provider.
 
-- Giving our customers the ability find Service Providers that can collect their waste at a given date.
-- Giving our customers the ability to register a waste pick up.
+These business cases form the basis of the use cases you will be implementing in this assignment.
 
 ## The assignment
 
 ---
 
-The task is to at least complete two use cases and their corresponding specs.
+### General Requirements
 
-### Service partners availability
+For both use cases, certain validation rules apply universally:
 
-> **Context**:
->
-> - A customer wants to find available service partners that can perform a waste pickup at a given date.
->
-> **Requirements**:
->
-> - The provided postal code must be a valid postal code (assuming simplified range from 0000 to 9999).
-> - The provided waste stream must be a valid stream.
-> - The date must not be before tomorrow 0:00 (you can disregard timezones).
+- Postal codes: Must be within the 0000 to 9999 range.
+- The application does not need to consider timezones for simplicity.
+- Waste streams: Must correspond to a predefined record in list of valid streams.
+- Service provider: Must corresponde to a prefedined record in a list of service providers.
 
-see: <https://github.com/seenons/seenons-be-assignment/blob/main/src/usecases/availability/find_availability_at.ts>
+### Specific Use Case Requirements
 
-### Register waste pickup
+1. **Service Partners Availability**
+   Ensure the date for waste pickup is not before tomorrow, accounting for a next-day service policy.
+   see: <https://github.com/seenons/seenons-be-assignment/blob/main/src/usecases/availability/find_availability_at.ts>
 
-> **Context**:
->
-> - A customer wants to register a waste pickup to be performed by a previously selected service provider at a given date.
->
-> **Requirements**:
->
-> - The provided service provider must exist.
-> - The provided date must be available for the selected service provider.
-> - The provided customer postal code must be covered by the selected service provider.
-
-see: <https://github.com/seenons/seenons-be-assignment/blob/main/src/usecases/pickup/register_waste_pickup.ts>
+2. **Register Waste Pickup**
+   The selected date must be within the service provider's scheduling constaints and waste stream availability.
+   see: <https://github.com/seenons/seenons-be-assignment/blob/main/src/usecases/pickup/register_waste_pickup.ts>
 
 Notes:
 
 - You can use the provided code as a starting point or rebuild it however you see fit, including the domain representations in case you do not agree with its current contents.
-- These usecases and business requirements are not fully described on purpose.
 
 ## The delivery
 
@@ -61,151 +51,51 @@ Notes:
 
 ---
 
-### Waste Stream
+**Customer**: A business entity or individual that generates waste and requires collection services. They initiate the request for waste pickup at a specified location and time.
 
-> **Definition**:
-> A Waste Stream is an entry in our domain model that represents a specific category of waste material.
-> Each Waste Stream is unique and immutable, identified by specific characteristics such as its label and category (e.g., recyclable, non-recyclable, hazardous).
-> **Role**:
-> It is used to classify the waste collected and processed by Service Providers, and to match the waste disposal needs of Customers.
-> **Attributes**:
-> id: A unique identifier for the Waste Stream.
-> label: A human-readable name or label for the Waste Stream (e.g., paper, metal, glass).
-> category: A classification of the Waste Stream. This helps in determining the appropriate handling and processing methods.
+**Service Provider**: A business or organization that specializes in the collection and processing of waste. They have specific capabilities and coverage areas, determining where and what types of waste they can handle.
 
-| id  | label | category   |
-| --- | ----- | ---------- |
-| 1   | paper | recyclable |
-| 2   | metal | recyclable |
-| 3   | glass | recyclable |
+**Waste Stream**: A category of waste, identified by characteristics like material type (e.g., paper, metal, glass) and disposal method (e.g., recyclable, non-recyclable). It's what the customer needs to dispose of and the service provider agrees to collect.
 
-See: <https://github.com/seenons/seenons-be-assignment/blob/main/src/domain/waste_stream.ts>
+**Registered Waste Pickups**: The scheduled event where a service provider collects a specific waste stream from the customer at a predetermined date and location. It's a record of the service agreement between the customer and the service provider.
 
-### Service Provider
+**Summary**
+In essence, our domain models create a framework for managing waste collection and processing. Customers looking to dispose of waste connect with service providers capable of handling their specific waste streams. Registered waste pickups are the logistical manifestation of this connection, representing the planned collection events based on the mutual agreement between the customer and the service provider.
 
-> **Definition**:
-> The Service Provider is an entry in our domain model that represents businesses or organizations responsible for the collection and management of waste streams.
-> Each Service Provider has a unique identity and capabilities.
-> **Role**:
-> Service Providers are central to the waste management ecosystem. They not only collect but can also process waste streams as per environmental standards and customer requirements.
-> **Attributes**:
-> id: A unique identifier for the Service Provider.
-> name: The name of the Service Provider.
-> address: The primary location or headquarters of the Service Provider.
-> coverages: An array representation of Waste Streams that the Service Provider can handle at a given postal code range and days of the week.
-
-| id  |      name      |       address        | coverages |
-| :-: | :------------: | :------------------: | :-------: |
-|  1  |    Unwasted    |   Stationplein, 1    |    [ ]    |
-|  2  | Bluecollection | Prins Hendrikkade, 1 |    [ ]    |
-
-See: <https://github.com/seenons/seenons-be-assignment/blob/main/src/domain/service_provider.ts>
-
-### Service Provider Coverage
-
-> **Definition**:
-> A relational entry that links Service Providers with specific Waste Streams coverages.
-> **Role**:
-> It is used to determine which Waste Streams are covered by a >Service Provider in a given area
-> **Attributes**:
-> id: A unique identifier for the Service Provider Coverage.
-> stream: The Waste Stream that the Service Provider can handle.
-> postal_code_start: The starting postal code of the area covered by >the Service Provider.
-> postal_code_end: The ending postal code of the area covered by the >Service Provider.
-> weekday_availability: An array of weekdays that the Service >Provider can handle the Waste Stream.
-
-| id  |  stream  | postal_code_start | postal_code_end |              weekday_availability              |
-| :-: | :------: | :---------------: | :-------------: | :--------------------------------------------: |
-|  1  | paper(1) |       1010        |      1020       |          [Monday, Tuesday, Thursday]           |
-|  2  | metal(2) |       1010        |      1020       |          [Monday, Wednesday, Friday]           |
-|  3  | metal(2) |       1000        |      9999       | [Monday, Tuesday, Wednesday, Thursday, Friday] |
-
-See: <https://github.com/seenons/seenons-be-assignment/blob/main/src/domain/service_provider_coverage.ts>
-
-### Customer
-
-> **Definition**:
-> A Customer is an entry in our domain model that represents a person or business entity that has waste to be collected at a given address.
-> **Role**:
-> Customers are the ones that request the collection of waste streams.
-> **Attributes**:
-> id: A unique identifier for the Customer.
-> name: The name of the Customer.
-> address: The address of the Customer.
-> postal_code: The postal code referred to the address.
-
-| id  |     name      |        address         | postal_code |
-| :-: | :-----------: | :--------------------: | :---------: |
-|  1  |    Seenons    |    Danzigerkade 5B     |    1015     |
-|  2  | Mega City One | Prins Hendrikkade, 100 |    2000     |
-
-See: <https://github.com/seenons/seenons-be-assignment/blob/main/src/domain/customer.ts>
-
-### Registered Waste Pickups
-
-> **Definition**:
-> A Registered Waste Pickup is an entry in our domain model that >represents a scheduled pickup of a Waste Stream to be performed by >a Service Provider at a given date.
-> **Role**:
-> It is used to register the pickup of a Waste Stream which has to >be performed by a Service Provider at a given date.
-> **Attributes**:
-> id: A unique identifier for the Registered Stream Pickup.
-> waste_stream: The Waste Stream to be picked up.
-> service_provider: The Service Provider that will pick up the Waste >Stream.
-> pickup_date: The date when the pickup will happen.
-
-| id  | waste_stream | service_provider  | pickup_date |
-| :-: | :----------: | :---------------: | ----------- |
-|  1  |   paper(1)   |    Unwasted(1)    | 2023-10-02  |
-|  2  |   metal(2)   |    Unwasted(1)    | 2023-10-04  |
-|  3  |   metal(2)   | Bluecollection(2) | 2023-10-04  |
-|  4  |   metal(2)   | Bluecollection(2) | 2023-10-06  |
-
-See: <https://github.com/seenons/seenons-be-assignment/blob/main/src/domain/registered_stream_pickup.ts>
+If you wish to read the much longer and detailed version of the domain models, see: <https://github.com/seenons/seenons-be-assignment/blob/main/DOMAIN.md>
 
 ## What are we looking for
 
 ---
 
-1. Implementation
-2. Test coverage
-3. Opportunities and Improvements
+### 1. Implementation (required)
 
-### Implementation (required)
+Your implementation should fulfill the specified use cases, demonstrating a clear understanding of the business logic and the domain model interactions.
 
-- Make sure that a Waste Stream can be picked up by the Service Provider at the given date and postal code
+Key aspects we will assess include:
 
-- Make sure that when searching for availability, the following table is respected per postal code and date:
-  - You can use the provided data set to achieve it. see: <https://github.com/seenons/seenons-be-assignment/blob/main/src/domain/dataset/service_providers.data.ts>
-
-| postal_code |    date    |                      result                      |
-| :---------: | :--------: | :----------------------------------------------: |
-|    1010     | 2023-10-02 | [Unwasted (paper, metal), Bluecollection(metal)] |
-|    1010     | 2023-10-04 |    [Unwasted(metal) , Bluecollection(metal)]     |
-|    2000     | 2023-10-05 |             [Bluecollection(metal)]              |
-|    1010     | 2023-10-08 |                        []                        |
-|    0000     | 2023-10-03 |                        []                        |
+- Accuracy in meeting use cases requirements.
+- Code quality and structure.
+- Scalability and maintainability.
 
 ### Test Coverage (required)
 
-We provided a set of required test cases, feel free to add others if you spot a missing requirement.
-
-see: <https://github.com/seenons/seenons-be-assignment/blob/main/src/usecases/availability/find_availability_at.spec.ts>
-
-see: <https://github.com/seenons/seenons-be-assignment/blob/main/src/usecases/pickup/register_waste_pickup.spec.ts>
+We value thorough test coverage that ensures your implementation behaves as expected.
+You might also be able to find edge cases that were not added
 
 ### Bonus Points (not required but a nice to have)
 
 #### Opportunities
 
-- Implement a Database Provider and whatever layer of communication you deem neccessary.
-- Can you implement a caching strategy somewhere?
-- Can you apply a better design pattern for the overall registration and data modeling following concepts around Rich Domains?
-- Can you show us your understanding of Loose Coupling and Single Responsiblity?
-- Can you spot opportunities for a read-model? If you do, how would you achieve it?
-- Apply concepts of distributed messaging, consitency models and overall concurrency.
-- How would you limit the amount of waste pickups that a Service Provider can perform per day?
+While the core focus is on the required tasks, we encourage you to explore additional enhancements that can elevate your solution. This is your chance to showcase creativity and depth of knowledge in software engineering principles.
 
-Note: Not everything has to be done in code, you can also describe how you would achieve these opportunities in your readme file.
+Opportunities include:
+
+- Database and Caching.
+- Design Patterns and Architecture.
+- Understanding of modern software engineering concepts.
+
+These are not mandatory but are highly appreciated and can distinguish your submission. Whether through code or in your readme file, we look forward to seeing your ideas.
 
 ## Technologies Used
 
@@ -239,13 +129,41 @@ The assignment is meant for all levels of seniority in mind, so the concepts, pa
 
 ## FAQ
 
-- Do I have to use the base project for my assignment? No
-- Do I have to use exactly the payload and response models that were provided? No
-- Can I rename or move the files? Yes
-- Can I use architectural patterns X or Y? Please do.
-- Do I have to use a database? No, you can use in memory objects or the provided data set
-- Can I expose this as an API instead? Yes
-- Can I do more than asked? Yes, the time is yours
-- Is there a deadline? No, but please be mindful that its FIFO.
-- How long does it take to complete the assignment? You can use as much time as you want. Make it nice, make it useful, or make it print ASCII art. You choose, as it's your personal time.
-- Do I have to keep the current code style and conventions? No, you can use your own.
+Q: Do I have to strictly follow the provided project structure and naming conventions?
+A: No, you have the flexibility to structure your project in a way that makes sense for your solution. However, please ensure your readme clearly explains any significant deviations to help reviewers follow your thought process.
+
+Q: Is it okay to implement additional features not outlined in the requirements?
+A: Oh yes! We encourage innovation and exploring new ideas.
+
+Q: How should I handle any assumptions I need to make during the implementation?
+A: You can document assumptions in your project's readme.
+
+Q: What happens after I submit my assignment?
+A: We will review your submission and provide feedback. The review process typically takes 1 working day.
+
+Q: Are there any specific coding standards or practices I should follow?
+A: While we have no strict requirements, we recommend following industry best practices for code quality, testing, and documentation. This includes clear naming conventions, modular design, and comprehensive unit tests.
+
+Q: Can I include third-party libraries or frameworks in my solution?
+A: Yes, third-party libraries are allowed.
+
+Q: Can I make this an API instead?
+A: Yes
+
+Q: Can I add memes and ASCII Art?
+A: Please do.
+
+```
+           .--._.--.
+          ( O     O )
+          /   . .   \
+         .`._______.'.
+        /(           )\
+      _/  \  \   /  /  \_
+   .~   `  \  \ /  /  '   ~.
+  {    -.   \  V  /   .-    }
+_ _`.    \  |  |  |  /    .'_ _
+>_       _} |  |  | {_       _<
+ /. - ~ ,_-'  .^.  `-_, ~ - .\
+         '-'|/   \|`-`
+```
