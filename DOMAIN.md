@@ -23,7 +23,7 @@ See: <https://github.com/seenons/seenons-be-assignment/blob/main/src/domain/wast
 > id: A unique identifier for the Service Provider.
 > name: The name of the Service Provider, used for identification and communication with customers.
 > coverages: An array representing the types of Waste Streams the Service Provider can handle, along with applicable postal code ranges and days of the week.
-> **Example**: In the 'Register Waste Pickup' use case, once a customer selects a Service Provider based on available dates and waste types, the system checks this provider's coverages to ensure they can service the customer's postal code with the selected waste stream on the requested date."
+> **Example**: In the 'Register Waste Pickup' use case, once a customer selects a Service Provider based on available dates and waste types, the system checks this provider's coverages to ensure they can service the customer's postal code with the selected waste stream on the requested date.
 
 See: <https://github.com/seenons/seenons-be-assignment/blob/main/src/domain/service_provider.ts>
 
