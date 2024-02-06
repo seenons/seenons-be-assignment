@@ -212,3 +212,7 @@ The assignment is meant for all levels of seniority in mind, so the concepts, pa
 - Can I rename or move the files? Yes
 - Can I use architectural patterns X or Y? Please do.
 - Do I have to use a database? No, you can use in memory objects or the provided data set
+- Can I expose this as an API instead? Yes
+- Can I do more than asked? Yes, the time is yours
+- Is there a deadline? No, but please be mindful that its FIFO.
+- How long does it take to complete the assignment? You can use as much time as you want, make it nice, make it useful, make it print ascii art, you choose as its your personal time.
