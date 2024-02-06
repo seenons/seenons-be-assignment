@@ -215,4 +215,4 @@ The assignment is meant for all levels of seniority in mind, so the concepts, pa
 - Can I expose this as an API instead? Yes
 - Can I do more than asked? Yes, the time is yours
 - Is there a deadline? No, but please be mindful that its FIFO.
-- How long does it take to complete the assignment? You can use as much time as you want, make it nice, make it useful, make it print ascii art, you choose as its your personal time.
+- How long does it take to complete the assignment? You can use as much time as you want. Make it nice, make it useful, or make it print ASCII art. You choose, as it's your personal time.
