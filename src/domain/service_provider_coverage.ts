@@ -1,8 +1,8 @@
-import { WasteStreamEntity } from './waste_stream.entity';
+import { WasteStream as WasteStream } from './waste_stream';
 
-export class ServiceProviderCoverageEntity {
+export class ServiceProviderCoverage {
   id!: string;
-  waste_stream!: WasteStreamEntity;
+  waste_stream!: WasteStream;
   postal_code_start!: string;
   postal_code_end!: string;
   weekday_availability!: Weekday[];
