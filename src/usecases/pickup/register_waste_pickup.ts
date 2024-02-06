@@ -18,8 +18,8 @@ export type RegisterWastePickupResponse =
 export class RegisterWastePickup {
   constructor() {}
 
-  public registerStream(payload: RegisterWastePickupPayload): RegisterWastePickupResponse {
-    const customer = {} as Customer;
+  public register(payload: RegisterWastePickupPayload): RegisterWastePickupResponse {
+    const customer: Customer | null = null;
 
     if (!customer) {
       return {

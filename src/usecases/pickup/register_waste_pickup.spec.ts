@@ -1,6 +1,6 @@
 import { RegisterWastePickup } from './register_waste_pickup';
 
-describe('RegisterStreamService', () => {
+describe('RegisterWastePickup', () => {
   let registerWastePickup: RegisterWastePickup;
 
   beforeEach(() => {
@@ -11,9 +11,9 @@ describe('RegisterStreamService', () => {
     jest.clearAllMocks();
   });
 
-  describe('registerStream', () => {
+  describe('register', () => {
     it(`should return an error if the customer doesn't exist`, () => {
-      const response = registerWastePickup.registerStream({
+      const response = registerWastePickup.register({
         customerId: 'customer-id',
         streamId: 'stream-id',
         serviceProviderId: 'service-provider-id',
