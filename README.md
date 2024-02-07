@@ -33,7 +33,7 @@ For both use cases, certain validation rules apply universally:
    see: <https://github.com/seenons/seenons-be-assignment/blob/main/src/usecases/availability/find_availability_at.ts>
 
 2. **Register Waste Pickup**
-   The selected date must be within the service provider's scheduling constaints and waste stream availability.
+   The selected date must be within the service provider's scheduling constraints and waste stream availability.
    see: <https://github.com/seenons/seenons-be-assignment/blob/main/src/usecases/pickup/register_waste_pickup.ts>
 
 Notes:
