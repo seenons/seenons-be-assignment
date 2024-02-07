@@ -20,13 +20,13 @@ describe('FindAvailability', () => {
     });
 
     it(`should return empty list if no service providers are available for postal code 1010 on a Sunday (2023-10-08)`, () => {
-      const availableProviders = findAvailability.at('1010', new Date('2023-10-08'));
+      const availableProviders = findAvailability.at({});
 
       expect(availableProviders).toEqual([]);
     });
 
     it(`should return empty list if no service providers are available at postal code 0000`, () => {
-      const availableProviders = findAvailability.at('0000', new Date('2023-10-08'));
+      const availableProviders = findAvailability.at({});
 
       expect(availableProviders).toEqual([]);
     });

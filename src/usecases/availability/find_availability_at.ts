@@ -1,3 +1,5 @@
+export type FindAvailabilityAtPayload = {}
+
 export type FindAvailabilityAtResponse = {
   service_provider_id: string;
   service_provider_name: string;
@@ -11,7 +13,7 @@ export class FindAvailability {
   constructor() {
   }
 
-  public at(postalCode: string, date: Date): Array<FindAvailabilityAtResponse> {
+  public at(payload: FindAvailabilityAtPayload): Array<FindAvailabilityAtResponse> {
     return [];
   }
 }
