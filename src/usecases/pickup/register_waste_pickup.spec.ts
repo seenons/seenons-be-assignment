@@ -25,12 +25,19 @@ describe('RegisterWastePickup', () => {
       });
     });
 
-    it(`should return an error if the stream doesn't exist`, () => {});
+    it(`should return an error if the stream doesn't exist`, () => {
+    });
 
-    it(`should return an error if the service provider doesn't exist`, () => {});
+    it(`should return an error if the service provider doesn't exist`, () => {
+    });
 
-    it(`should return an error if the pickup date is not available for the service provider`, () => {});
+    it(`should return an error if the pickup date is not available for the service provider`, () => {
+    });
 
-    it(`should register the waste stream pickup`, () => {});
+    it(`should return an error if the pickup date is before tomorrow`, () => {
+    });
+
+    it(`should register the waste stream pickup`, () => {
+    });
   });
 });
