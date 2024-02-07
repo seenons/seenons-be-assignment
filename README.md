@@ -15,8 +15,6 @@ These business cases form the basis of the use cases you will be implementing in
 
 ## The assignment
 
----
-
 ### General Requirements
 
 For both use cases, certain validation rules apply universally:
@@ -43,8 +41,6 @@ Notes:
 
 ## The delivery
 
----
-
 - Create a **private** copy of this repository. Do not fork it.
 - Create a new readme file that explains your take on the assignment, your thought process, and any other information
   that you believe is relevant for the review.
@@ -52,8 +48,6 @@ Notes:
 - Invite <caio@seenons.com> as a collaborator to your private repository.
 
 ## Domain models
-
----
 
 **Customer**: A business entity or individual that generates waste and requires collection services. They initiate the
 request for waste pickup at a specified location and time.
@@ -80,9 +74,7 @@ see: <https://github.com/seenons/seenons-be-assignment/blob/main/DOMAIN.md>
 
 ## What are we looking for
 
----
-
-### 1. Implementation (required)
+### Implementation (required)
 
 Your implementation should fulfill the specified use cases, demonstrating a clear understanding of the business logic
 and the domain model interactions.
@@ -100,7 +92,7 @@ You might also be able to find edge cases that were not added
 
 ### Bonus Points (not required but a nice to have)
 
-#### Opportunities
+#### Opportunities 
 
 While the core focus is on the required tasks, we encourage you to explore additional enhancements that can elevate your
 solution. This is your chance to showcase creativity and depth of knowledge in software engineering principles.
@@ -115,8 +107,6 @@ These are not mandatory but are highly appreciated and can distinguish your subm
 readme file, we look forward to seeing your ideas.
 
 ## Technologies Used
-
----
 
 This project is built using the following technologies:
 
@@ -137,8 +127,6 @@ If you are not familiar with these technologies, you can also complete the assig
 Would you rather do it in another language? Let us know beforehand!
 
 ## Disclaimer
-
----
 
 Please note that this assignment is not a direct representation of how Seenons built its software.
 
