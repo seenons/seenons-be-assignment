@@ -2,7 +2,9 @@
 
 Hello there!
 
-At Seenons, we are building a platform to support a circular economy. This encompasses collection, transportation, and re-purposing of different waste streams. The assignment you're about to undertake directly addresses two core aspects of our platform, which are integral to our mission:
+At Seenons, we are building a platform to support a circular economy. This encompasses collection, transportation, and
+re-purposing of different waste streams. The assignment you're about to undertake directly addresses two core aspects of
+our platform, which are integral to our mission:
 
 - **Finding service providers for waste collection**:
   Enabling our customers to locate service providers who can collect their waste on a specified date.
@@ -22,7 +24,7 @@ For both use cases, certain validation rules apply universally:
 - Postal codes: Must be within the 0000 to 9999 range.
 - The application does not need to consider timezones for simplicity.
 - Waste streams: Must correspond to a predefined record in list of valid streams.
-- Service provider: Must corresponde to a prefedined record in a list of service providers.
+- Service provider: Must correspond to a predefined record in a list of service providers.
 
 ### Specific Use Case Requirements
 
@@ -36,14 +38,16 @@ For both use cases, certain validation rules apply universally:
 
 Notes:
 
-- You can use the provided code as a starting point or rebuild it however you see fit, including the domain representations in case you do not agree with its current contents.
+- You can use the provided code as a starting point or rebuild it however you see fit, including the domain
+  representations in case you do not agree with its current contents.
 
 ## The delivery
 
 ---
 
 - Create a **private** copy of this repository. Do not fork it.
-- Create a new readme file that explains your take on the assignment, your thought process, and any other information that you believe is relevant for the review.
+- Create a new readme file that explains your take on the assignment, your thought process, and any other information
+  that you believe is relevant for the review.
 - Implement the necessary changes to at least achieve the requirements.
 - Invite <caio@seenons.com> as a collaborator to your private repository.
 
@@ -51,18 +55,28 @@ Notes:
 
 ---
 
-**Customer**: A business entity or individual that generates waste and requires collection services. They initiate the request for waste pickup at a specified location and time.
+**Customer**: A business entity or individual that generates waste and requires collection services. They initiate the
+request for waste pickup at a specified location and time.
 
-**Service Provider**: A business or organization that specializes in the collection and processing of waste. They have specific capabilities and coverage areas, determining where and what types of waste they can handle.
+**Service Provider**: A business or organization that specializes in the collection and processing of waste. They have
+specific capabilities and coverage areas, determining where and what types of waste they can handle.
 
-**Waste Stream**: A category of waste, identified by characteristics like material type (e.g., paper, metal, glass) and disposal method (e.g., recyclable, non-recyclable). It's what the customer needs to dispose of and the service provider agrees to collect.
+**Waste Stream**: A category of waste, identified by characteristics like material type (e.g., paper, metal, glass) and
+disposal method (e.g., recyclable, non-recyclable). It's what the customer needs to dispose of and the service provider
+agrees to collect.
 
-**Registered Waste Pickups**: The scheduled event where a service provider collects a specific waste stream from the customer at a predetermined date and location. It's a record of the service agreement between the customer and the service provider.
+**Registered Waste Pickups**: The scheduled event where a service provider collects a specific waste stream from the
+customer at a predetermined date and location. It's a record of the service agreement between the customer and the
+service provider.
 
 **Summary**
-In essence, our domain models create a framework for managing waste collection and processing. Customers looking to dispose of waste connect with service providers capable of handling their specific waste streams. Registered waste pickups are the logistical manifestation of this connection, representing the planned collection events based on the mutual agreement between the customer and the service provider.
+In essence, our domain models create a framework for managing waste collection and processing. Customers looking to
+dispose of waste connect with service providers capable of handling their specific waste streams. Registered waste
+pickups are the logistical manifestation of this connection, representing the planned collection events based on the
+mutual agreement between the customer and the service provider.
 
-If you wish to read the much longer and detailed version of the domain models, see: <https://github.com/seenons/seenons-be-assignment/blob/main/DOMAIN.md>
+If you wish to read the much longer and detailed version of the domain models,
+see: <https://github.com/seenons/seenons-be-assignment/blob/main/DOMAIN.md>
 
 ## What are we looking for
 
@@ -70,7 +84,8 @@ If you wish to read the much longer and detailed version of the domain models, s
 
 ### 1. Implementation (required)
 
-Your implementation should fulfill the specified use cases, demonstrating a clear understanding of the business logic and the domain model interactions.
+Your implementation should fulfill the specified use cases, demonstrating a clear understanding of the business logic
+and the domain model interactions.
 
 Key aspects we will assess include:
 
@@ -87,7 +102,8 @@ You might also be able to find edge cases that were not added
 
 #### Opportunities
 
-While the core focus is on the required tasks, we encourage you to explore additional enhancements that can elevate your solution. This is your chance to showcase creativity and depth of knowledge in software engineering principles.
+While the core focus is on the required tasks, we encourage you to explore additional enhancements that can elevate your
+solution. This is your chance to showcase creativity and depth of knowledge in software engineering principles.
 
 Opportunities include:
 
@@ -95,7 +111,8 @@ Opportunities include:
 - Design Patterns and Architecture.
 - Understanding of modern software engineering concepts.
 
-These are not mandatory but are highly appreciated and can distinguish your submission. Whether through code or in your readme file, we look forward to seeing your ideas.
+These are not mandatory but are highly appreciated and can distinguish your submission. Whether through code or in your
+readme file, we look forward to seeing your ideas.
 
 ## Technologies Used
 
@@ -125,12 +142,14 @@ Would you rather do it in another language? Let us know beforehand!
 
 Please note that this assignment is not a direct representation of how Seenons built its software.
 
-The assignment is meant for all levels of seniority in mind, so the concepts, patterns, domain models and tools have been simplified to ensure fairness.
+The assignment is meant for all levels of seniority in mind, so the concepts, patterns, domain models and tools have
+been simplified to ensure fairness.
 
 ## FAQ
 
 Q: Do I have to strictly follow the provided project structure and naming conventions?
-A: No, you have the flexibility to structure your project in a way that makes sense for your solution. However, please ensure your readme clearly explains any significant deviations to help reviewers follow your thought process.
+A: No, you have the flexibility to structure your project in a way that makes sense for your solution. However, please
+ensure your readme clearly explains any significant deviations to help reviewers follow your thought process.
 
 Q: Is it okay to implement additional features not outlined in the requirements?
 A: Oh yes! We encourage innovation and exploring new ideas.
@@ -142,7 +161,8 @@ Q: What happens after I submit my assignment?
 A: We will review your submission and provide feedback. The review process typically takes 1 working day.
 
 Q: Are there any specific coding standards or practices I should follow?
-A: While we have no strict requirements, we recommend following industry best practices for code quality, testing, and documentation. This includes clear naming conventions, modular design, and comprehensive unit tests.
+A: While we have no strict requirements, we recommend following industry best practices for code quality, testing, and
+documentation. This includes clear naming conventions, modular design, and comprehensive unit tests.
 
 Q: Can I include third-party libraries or frameworks in my solution?
 A: Yes, third-party libraries are allowed.

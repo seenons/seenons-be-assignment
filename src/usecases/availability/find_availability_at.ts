@@ -1,5 +1,3 @@
-import { serviceProviders } from '@domain/dataset/service_providers.data';
-
 export type FindAvailabilityAtResponse = {
   service_provider_id: string;
   service_provider_name: string;
@@ -10,15 +8,10 @@ export type FindAvailabilityAtResponse = {
 };
 
 export class FindAvailability {
-  constructor() {}
+  constructor() {
+  }
 
-  public at(
-    postalCode: string,
-    wasteStreamId: string,
-    date: Date,
-  ): Array<FindAvailabilityAtResponse> {
-    //you can use the `serviceProviders` as a data set to find the availability
-
+  public at(postalCode: string, date: Date): Array<FindAvailabilityAtResponse> {
     return [];
   }
 }

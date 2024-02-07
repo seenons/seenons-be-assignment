@@ -15,12 +15,9 @@
     "strict": true,
     "skipLibCheck": true,
     "paths": {
-      "@common/*": ["src/common/*"],
       "@domain/*": ["src/domain/*"],
       "@tests/*": ["tests/*"],
-      "@api/*": ["src/api/*"],
-      "@queue/*": ["src/queue/*"],
-      "@config/*": ["src/config/*"]
+      "@usecases/*": ["src/usecases/*"]
     },
     "plugins": [
       {

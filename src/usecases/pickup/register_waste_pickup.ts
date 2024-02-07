@@ -1,6 +1,6 @@
-import { Customer } from '../../domain/customer';
-import { WasteStream } from '../../domain/waste_stream';
-import { ServiceProvider } from '../../domain/service_provider';
+import { Customer } from '@domain/customer';
+import { ServiceProvider } from '@domain/service_provider';
+import { WasteStream } from '@domain/waste_stream';
 
 export type RegisterWastePickupPayload = {
   customerId: string;
