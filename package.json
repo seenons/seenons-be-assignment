@@ -8,7 +8,6 @@
     "prebuild": "rimraf dist",
     "build": "tsc",
     "format": "prettier --write \"src/**/*.ts\" \"tests/**/*.ts\"",
-    "start": "npm run build && node dist/src/app.js",
     "lint": "eslint . --ext .ts",
     "test": "TZ=UTC npx jest --config jest.config.ts",
     "test:watch": "TZ=UTC jest --watch --verbose --maxWorkers=50%",

@@ -11,6 +11,8 @@ export default {
   moduleNameMapper: {
     '@tests/(.*)': ['<rootDir>/tests/$1'],
     '@src/(.*)': ['<rootDir>/src/$1'],
+    '@domain/(.*)': ['<rootDir>/src/domain/$1'],
+    '@usecases/(.*)': ['<rootDir>/src/usecases/$1'],
   },
   roots: ['<rootDir>'],
   testMatch: ['**/__tests__/**/*.[jt]s?(x)', '**/?(*.)+(spec).[tj]s?(x)'],

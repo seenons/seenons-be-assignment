@@ -5,7 +5,7 @@ export enum WasteStreamCategory {
   residual_waste = 'residual_waste',
 }
 
-export class WasteStreamEntity {
+export class WasteStream {
   id!: string;
   label!: string;
   category!: WasteStreamCategory;
