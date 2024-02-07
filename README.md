@@ -92,7 +92,7 @@ You might also be able to find edge cases that were not added
 
 ### Bonus Points (not required but a nice to have)
 
-#### Opportunities 
+#### Opportunities
 
 While the core focus is on the required tasks, we encourage you to explore additional enhancements that can elevate your
 solution. This is your chance to showcase creativity and depth of knowledge in software engineering principles.
@@ -135,31 +135,39 @@ been simplified to ensure fairness.
 
 ## FAQ
 
-Q: Do I have to strictly follow the provided project structure and naming conventions?
-A: No, you have the flexibility to structure your project in a way that makes sense for your solution. However, please
+> Do I have to strictly follow the provided project structure and naming conventions?
+
+No, you have the flexibility to structure your project in a way that makes sense for your solution. However, please
 ensure your readme clearly explains any significant deviations to help reviewers follow your thought process.
 
-Q: Is it okay to implement additional features not outlined in the requirements?
-A: Oh yes! We encourage innovation and exploring new ideas.
+> Is it okay to implement additional features not outlined in the requirements?
 
-Q: How should I handle any assumptions I need to make during the implementation?
-A: You can document assumptions in your project's readme.
+Oh yes! We encourage innovation and exploring new ideas.
 
-Q: What happens after I submit my assignment?
-A: We will review your submission and provide feedback. The review process typically takes 1 working day.
+> How should I handle any assumptions I need to make during the implementation?
 
-Q: Are there any specific coding standards or practices I should follow?
-A: While we have no strict requirements, we recommend following industry best practices for code quality, testing, and
+You can document assumptions in your project's readme.
+
+> What happens after I submit my assignment?
+
+We will review your submission and provide feedback. The review process typically takes 1 working day.
+
+> Are there any specific coding standards or practices I should follow?
+
+While we have no strict requirements, we recommend following industry best practices for code quality, testing, and
 documentation. This includes clear naming conventions, modular design, and comprehensive unit tests.
 
-Q: Can I include third-party libraries or frameworks in my solution?
-A: Yes, third-party libraries are allowed.
+> Can I include third-party libraries or frameworks in my solution?
 
-Q: Can I make this an API instead?
-A: Yes
+Yes, third-party libraries are allowed.
 
-Q: Can I add memes and ASCII Art?
-A: Please do.
+> Can I make this an API instead?
+
+Pick your poison! You can make it an API, a CLI, or a GUI. It's up to you.
+
+> Can I add memes and ASCII Art?
+
+Please do, here's our toady lucky friend.
 
 ```
            .--._.--.
