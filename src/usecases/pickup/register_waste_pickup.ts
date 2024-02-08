@@ -9,11 +9,10 @@ export type RegisterWastePickupPayload = {
   pickupDate: Date;
 };
 
-export type RegisterWastePickupResponse = { success: boolean; } | { error: string; };
+export type RegisterWastePickupResponse = { success: boolean } | { error: string };
 
 export class RegisterWastePickup {
-  constructor() {
-  }
+  constructor() {}
 
   public register(payload: RegisterWastePickupPayload): RegisterWastePickupResponse {
     const customer: Customer | null = null;
@@ -28,6 +27,7 @@ export class RegisterWastePickup {
       id: 'a-random-id',
       waste_stream: new WasteStream(),
       service_provider: new ServiceProvider(),
+      customer: customer,
       pickup_date: payload.pickupDate,
     };
 
