@@ -112,10 +112,10 @@ This project is built using the following technologies:
 - TypeScript
 - Jest
 
-Although experience with these technologies is not a requirement to join our team, we are looking for people who will be
-able to work in this ecosystem, so we recommend you to use them.
+Although experience with these technologies is not a requirement to join our team, we are looking for people who will be able to work and feel comfortable with this ecosystem, so we recommend you to use them.
 
-If you are not familiar with these technologies and you would rather do it in another language, please let us know beforehand!
+If you are not familiar with them and you would rather do it in another language or stack, please let us know beforehand!
+Don't worry, we are flexible and versatile.
 
 ## Disclaimer
 
