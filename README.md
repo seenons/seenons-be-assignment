@@ -28,11 +28,8 @@ For both use cases, certain validation rules apply universally:
 
 1. **Service Partners Availability**
    Ensure the date for waste pickup is not before tomorrow, accounting for a next-day service policy.
-   see: <https://github.com/seenons/seenons-be-assignment/blob/main/src/usecases/availability/find_availability_at.ts>
-
 2. **Register Waste Pickup**
    The selected date must be within the service provider's scheduling constraints and waste stream availability.
-   see: <https://github.com/seenons/seenons-be-assignment/blob/main/src/usecases/pickup/register_waste_pickup.ts>
 
 Notes:
 
@@ -88,7 +85,7 @@ Key aspects we will assess include:
 ### Test Coverage (required)
 
 We value thorough test coverage that ensures your implementation behaves as expected.
-You might also be able to find edge cases that were not added
+You might also be able to find edge cases that were not added by us.
 
 ### Bonus Points (not required but a nice to have)
 
@@ -113,18 +110,12 @@ This project is built using the following technologies:
 - Node.js
 - npm
 - TypeScript
+- Jest
 
 Although experience with these technologies is not a requirement to join our team, we are looking for people who will be
 able to work in this ecosystem, so we recommend you to use them.
 
-If you are not familiar with these technologies, you can also complete the assignment using the ecosystems below.
-
-- .NET (Core) 5+
-- Java
-- Kotlin
-- Python
-
-Would you rather do it in another language? Let us know beforehand!
+If you are not familiar with these technologies and you would rather do it in another language, please let us know beforehand!
 
 ## Disclaimer
 
