@@ -42,7 +42,7 @@ Notes:
 - Create a new readme file that explains your take on the assignment, your thought process, and any other information
   that you believe is relevant for the review.
 - Implement the necessary changes to at least achieve the requirements.
-- Invite <caio@seenons.com> as a collaborator to your private repository.
+- Invite <tech-assignments@seenons.com> as a collaborator to your private repository.
 
 ## Domain models
 
