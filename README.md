@@ -141,7 +141,7 @@ You can document assumptions in your project's readme.
 
 > What happens after I submit my assignment?
 
-We will review your submission and provide feedback. The review process typically takes 1 working day.
+We will review your submission and provide feedback. You can expect the review to happen within a week of submission, but it usually doesn't take that long.
 
 > Are there any specific coding standards or practices I should follow?
 
